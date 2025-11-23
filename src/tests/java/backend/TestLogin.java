@@ -1,4 +1,4 @@
-public class Main {
+public class TestLogin {
     public static void main(String[] args) {
         // Initialize the login helper
         LoginSystem loginSys = new LoginSystem();
