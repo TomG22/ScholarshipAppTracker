@@ -1,36 +1,74 @@
 package backend;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Scholarship model for Matching Engine.
+ * Scholarship model used by Matching Engine.
  *
  * Supports:
- *  - ME-001 Minimum GPA requirement
+ *  - ME-001 Minimum GPA requirements
  *  - ME-002 Eligible majors list
  *  - ME-003 Required keyword list
+ *  - System Requirements: Scholarship Management, Scholarship Creation
  */
 public class Scholarship {
 
+    private String id;
     private String name;
+    private String description;
     private double minGpa;
+    private double amount;
+    private String awardYear;
+
+    private LocalDate deadline;
+    private boolean active;
+
     private List<String> eligibleMajors;
     private List<String> requiredKeywords;
 
-    public Scholarship(String name, double minGpa,
+    public Scholarship(String id,
+                       String name,
+                       String description,
+                       double minGpa,
+                       double amount,
+                       String awardYear,
+                       LocalDate deadline,
+                       boolean active,
                        List<String> eligibleMajors,
                        List<String> requiredKeywords) {
 
+        this.id = id;
         this.name = name;
+        this.description = description;
         this.minGpa = minGpa;
+        this.amount = amount;
+        this.awardYear = awardYear;
+        this.deadline = deadline;
+        this.active = active;
         this.eligibleMajors = eligibleMajors;
         this.requiredKeywords = requiredKeywords;
     }
 
-    public String getName() { return name; }
-    public double getMinGpa() { return minGpa; }
-    public List<String> getEligibleMajors() { return eligibleMajors; }
-    public List<String> getRequiredKeywords() { return requiredKeywords; }
+   
+    public Scholarship(String name, double minGpa,
+                       List<String> eligibleMajors,
+                       List<String> requiredKeywords) {
+        this(null, name, null, minGpa, 0.0, null, null, true, eligibleMajors, requiredKeywords);
+    }
 
+    public String getId()                { return id; }
+    public String getName()              { return name; }
+    public String getDescription()       { return description; }
+    public double getMinGpa()            { return minGpa; }
+    public double getAmount()            { return amount; }
+    public String getAwardYear()         { return awardYear; }
+    public LocalDate getDeadline()       { return deadline; }
+    public boolean isActive()            { return active; }
+    public List<String> getEligibleMajors()    { return eligibleMajors; }
+    public List<String> getRequiredKeywords()  { return requiredKeywords; }
+
+    public void setActive(boolean active) { this.active = active; }
 }
+
 
