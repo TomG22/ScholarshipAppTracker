@@ -3,40 +3,67 @@ package backend;
 import java.util.List;
 
 /**
- * Applicant model used by the Matching Engine.
+ *Applicant model used by the Matching Engine.
  *
  * Supports:
  *  - ME-001 GPA filtering
  *  - ME-002 Major comparison
  *  - ME-003 Essay & extracurricular keywords
- *
- * This class is intentionally simple so the backend
- * can expand it (e.g., add NetID, UID, year, etc.)
+ *  - System Requirements: Applicant Information, Applicant Data Management
  */
 public class Applicant {
 
+    private String id;
     private String name;
+    private String netId;
+    private String email;
     private double gpa;
     private String major;
+    private String minor;
+
+    // For Matching Engine (ME-003)
     private List<String> essayKeywords;
     private List<String> extracurricularKeywords;
 
-    public Applicant(String name, double gpa, String major,
+    public Applicant(String id,
+                     String name,
+                     String netId,
+                     String email,
+                     double gpa,
+                     String major,
+                     String minor,
                      List<String> essayKeywords,
                      List<String> extracurricularKeywords) {
+
+        this.id = id;
         this.name = name;
+        this.netId = netId;
+        this.email = email;
         this.gpa = gpa;
         this.major = major;
+        this.minor = minor;
         this.essayKeywords = essayKeywords;
         this.extracurricularKeywords = extracurricularKeywords;
     }
 
-    public String getName() { return name; }
-    public double getGpa() { return gpa; }
-    public String getMajor() { return major; }
+    // Minimal constructor for quick tests or demos
+    public Applicant(String name, double gpa, String major,
+                     List<String> essayKeywords,
+                     List<String> extracurricularKeywords) {
+        this(null, name, null, null, gpa, major, null, essayKeywords, extracurricularKeywords);
+    }
 
-    public List<String> getEssayKeywords() { return essayKeywords; }
-    public List<String> getExtracurricularKeywords() { return extracurricularKeywords; }
+    public String getId()            { return id; }
+    public String getName()          { return name; }
+    public String getNetId()         { return netId; }
+    public String getEmail()         { return email; }
+    public double getGpa()           { return gpa; }
+    public String getMajor()         { return major; }
+    public String getMinor()         { return minor; }
+    public List<String> getEssayKeywords()          { return essayKeywords; }
+    public List<String> getExtracurricularKeywords(){ return extracurricularKeywords; }
 
+    public void setGpa(double gpa)   { this.gpa = gpa; }
+    public void setMajor(String major){ this.major = major; }
+    public void setMinor(String minor){ this.minor = minor; }
 }
-
