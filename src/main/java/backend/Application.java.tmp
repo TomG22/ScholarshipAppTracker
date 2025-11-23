@@ -1,1 +1,58 @@
+package backend;
+
+import java.time.LocalDateTime;
+
+/**
+ * Application – links an Applicant to a Scholarship and tracks status.
+ *
+ * Supports:
+ *  - System Requirements: Application Management, Application Review,
+ *    Application Status, Award Disbursement, Reporting and Analytics.
+ */
+public class Application {
+
+    private String id;
+    private Applicant applicant;
+    private Scholarship scholarship;
+
+    private AppStatus status;
+    private LocalDateTime createdAt;
+    private LocalDateTime lastUpdatedAt;
+
+    // Optional: store the matching score used by Matching Engine
+    private Double matchScore;
+
+    public Application(String id,
+                       Applicant applicant,
+                       Scholarship scholarship,
+                       AppStatus status,
+                       LocalDateTime createdAt,
+                       LocalDateTime lastUpdatedAt,
+                       Double matchScore) {
+        this.id = id;
+        this.applicant = applicant;
+        this.scholarship = scholarship;
+        this.status = status;
+        this.createdAt = createdAt;
+        this.lastUpdatedAt = lastUpdatedAt;
+        this.matchScore = matchScore;
+    }
+
+    public String getId()             { return id; }
+    public Applicant getApplicant()   { return applicant; }
+    public Scholarship getScholarship(){ return scholarship; }
+    public AppStatus getStatus()      { return status; }
+    public LocalDateTime getCreatedAt(){ return createdAt; }
+    public LocalDateTime getLastUpdatedAt(){ return lastUpdatedAt; }
+    public Double getMatchScore()     { return matchScore; }
+
+    public void setStatus(AppStatus status) {
+        this.status = status;
+        this.lastUpdatedAt = LocalDateTime.now();
+    }
+
+    public void setMatchScore(Double matchScore) {
+        this.matchScore = matchScore;
+    }
+}
 
