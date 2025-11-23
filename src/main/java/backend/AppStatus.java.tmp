@@ -1,1 +1,19 @@
+package backend;
+
+/**
+ * AppStatus – life cycle states of a scholarship application.
+ *
+ * Supports:
+ *  - FR-004 Application Status Tracking
+ *  - System Requirement "Application Management"
+ */
+public enum AppStatus {
+    DRAFT,
+    SUBMITTED,
+    UNDER_REVIEW,
+    ACCEPTED,
+    REJECTED,
+    AWARDED,
+    WITHDRAWN
+}
 
