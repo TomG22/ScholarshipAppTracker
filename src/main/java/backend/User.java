@@ -1,16 +1,31 @@
+package backend;
+
 import java.util.UUID;
 
+/**
+ * User – represents any authenticated system user.
+ *
+ * Supports:
+ *  - FR-003 Login and Authentication
+ *  - BA-006 Role-Based Access Control (RBAC)
+ *  - System Requirement: Security & Compliance (FERPA-based access)
+ */
 public class User {
 
-    // Enum used for classifying user privileges
+    /**
+     * RoleType – defines privileges for each user group.
+     *
+     * Aligns with:
+     *  - AdminConsole (ADMIN)
+     *  - StudentConsole (APPLICANT)
+     *  - Reviewer workflows (REVIEWER)
+     *  - Donor requirements (SCHOLARSHIP_PROVIDER)
+     */
     public enum RoleType {
         APPLICANT,
         REVIEWER,
         SCHOLARSHIP_PROVIDER,
-        // Extra roles, if needed:
-        // SCHOLARSHIP_ADMIN,
-        // FUND_STEWARD,
-        // ENGR_IT,
+        ADMIN   
     }
 
     private final UUID userId;
@@ -19,7 +34,7 @@ public class User {
     private final String email;
     private final RoleType role;
 
-    // Constructor
+   
     public User(UUID userId, String netId, String name, String email, RoleType role) {
 
         if (userId == null) throw new IllegalArgumentException("UserId cannot be null.");
@@ -35,10 +50,11 @@ public class User {
         this.role = role;
     }
 
-    // Constructor to generate a new user and uuid automatically
+    /**
+     * Helper method to generate a new user with a random UUID.
+     */
     public static User genUser(String netId, String name, String email, RoleType role) {
-        UUID generatedUserId = UUID.randomUUID();
-        return new User(generatedUserId, netId, name, email, role);
+        return new User(UUID.randomUUID(), netId, name, email, role);
     }
 
     // Getters
@@ -47,4 +63,9 @@ public class User {
     public String getName() { return name; }
     public String getEmail() { return email; }
     public RoleType getRole() { return role; }
+
+    @Override
+    public String toString() {
+        return "[User: " + name + ", NetID=" + netId + ", Role=" + role + "]";
+    }
 }
