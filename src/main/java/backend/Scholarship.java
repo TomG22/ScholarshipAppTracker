@@ -1,28 +1,35 @@
 package backend;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
- * Scholarship model used for MatchingEngine.
- * Supports ME-001, ME-002, ME-003, ME-004.
+ * Scholarship model used for the MatchingEngine.
+ *
+ * Supports:
+ *  - ME-001 (min GPA gate)
+ *  - ME-002 (eligible majors)
+ *  - ME-003 (required keywords)
  */
 public class Scholarship {
 
-    private final String id;
     private final String name;
     private final double minGpa;
-    private final Set<String> eligibleMajors;
-    private final Set<String> requiredKeywords;
+    private final Set<String> eligibleMajors;     // lowercased
+    private final Set<String> requiredKeywords;   // lowercased
 
-    public Scholarship(String id,
-                       String name,
+    /**
+     * Constructor matching MatchingEngineTest usage.
+     *
+     * @param name              human-readable scholarship name
+     * @param minGpa            minimum GPA needed (0.0–4.0)
+     * @param eligibleMajors    list of allowed majors (e.g. "computer science"); empty = any major
+     * @param requiredKeywords  list of required keywords; empty = no keyword constraints
+     */
+    public Scholarship(String name,
                        double minGpa,
-                       Set<String> eligibleMajors,
-                       Set<String> requiredKeywords) {
+                       Collection<String> eligibleMajors,
+                       Collection<String> requiredKeywords) {
 
-        this.id = Objects.requireNonNull(id, "id cannot be null");
         this.name = Objects.requireNonNull(name, "name cannot be null");
 
         if (minGpa < 0.0 || minGpa > 4.0) {
@@ -30,19 +37,54 @@ public class Scholarship {
         }
         this.minGpa = minGpa;
 
-        this.eligibleMajors =
-                (eligibleMajors == null) ? new HashSet<>() : new HashSet<>(eligibleMajors);
-        this.requiredKeywords =
-                (requiredKeywords == null) ? new HashSet<>() : new HashSet<>(requiredKeywords);
+        this.eligibleMajors = new HashSet<>();
+        if (eligibleMajors != null) {
+            for (String m : eligibleMajors) {
+                if (m != null) {
+                    this.eligibleMajors.add(m.toLowerCase());
+                }
+            }
+        }
+
+        this.requiredKeywords = new HashSet<>();
+        if (requiredKeywords != null) {
+            for (String kw : requiredKeywords) {
+                if (kw != null) {
+                    this.requiredKeywords.add(kw.toLowerCase());
+                }
+            }
+        }
     }
 
-    public String getId() { return id; }
-    public String getName() { return name; }
-    public double getMinGpa() { return minGpa; }
+    public String getName() {
+        return name;
+    }
 
-    /** majors must be lowercase strings in this set */
-    public Set<String> getEligibleMajors() { return new HashSet<>(eligibleMajors); }
+    public double getMinGpa() {
+        return minGpa;
+    }
 
-    /** keywords expected to be lowercase strings */
-    public Set<String> getRequiredKeywords() { return new HashSet<>(requiredKeywords); }
+    /**
+     * Eligible majors as lowercase strings.
+     */
+    public Set<String> getEligibleMajors() {
+        return new HashSet<>(eligibleMajors);
+    }
+
+    /**
+     * Required keywords as lowercase strings.
+     */
+    public Set<String> getRequiredKeywords() {
+        return new HashSet<>(requiredKeywords);
+    }
+
+    @Override
+    public String toString() {
+        return "Scholarship{" +
+                "name='" + name + '\'' +
+                ", minGpa=" + minGpa +
+                ", eligibleMajors=" + eligibleMajors +
+                ", requiredKeywords=" + requiredKeywords +
+                '}';
+    }
 }
