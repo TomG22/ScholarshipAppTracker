@@ -2,70 +2,96 @@ package backend;
 
 import java.util.*;
 
+
 public class MatchingEngineTest {
 
     public static void main(String[] args) {
 
-        // Create test applicants
+        // --- Create test applicants using real team 8 names ---
+
         Applicant a1 = new Applicant(
-                "John Doe",
+                "Samiur R",
                 "Computer Science",
-                3.8,
-                Arrays.asList("ai", "coding"),
-                Arrays.asList("volunteer", "leadership")
+                3.9,
+                Arrays.asList("ai", "machine learning", "coding"),
+                Arrays.asList("leadership", "volunteer")
         );
 
         Applicant a2 = new Applicant(
-                "Sarah Student",
-                "Business",
-                2.5,
-                Arrays.asList("marketing"),
-                Arrays.asList("club", "finance")
+                "Tom G",
+                "Software Engineering",
+                3.4,
+                Arrays.asList("java", "backend"),
+                Arrays.asList("teamwork", "research")
         );
 
-        // Create scholarships
+        Applicant a3 = new Applicant(
+                "Lainey W",
+                "Information Science",
+                3.7,
+                Arrays.asList("design", "ux"),
+                Arrays.asList("service", "organization")
+        );
+
+        Applicant a4 = new Applicant(
+                "Sarah J",
+                "Business",
+                3.2,
+                Arrays.asList("marketing", "analytics"),
+                Arrays.asList("finance", "management")
+        );
+
+        // --- Create scholarships ---
         Scholarship s1 = new Scholarship(
-                "Tech Excellence Scholarship",
+                "STEM Excellence Scholarship",
                 3.5,
-                Arrays.asList("computer science"),
-                Arrays.asList("ai")
+                Arrays.asList("computer science", "software engineering"),
+                Arrays.asList("coding")
         );
 
         Scholarship s2 = new Scholarship(
-                "Business Leadership Award",
+                "Leadership Award",
                 3.0,
-                Arrays.asList("business"),
+                Collections.emptyList(), // any major
                 Arrays.asList("leadership")
         );
 
         Scholarship s3 = new Scholarship(
-                "General Merit",
-                3.2,
-                Collections.emptyList(),   // any major
-                Collections.emptyList()    // no keywords
+                "Business Merit Scholarship",
+                3.0,
+                Arrays.asList("business"),
+                Arrays.asList("analytics")
         );
 
         List<Scholarship> scholarshipList = List.of(s1, s2, s3);
 
-        // Instantiate Matching Engine
         MatchingEngine engine = new MatchingEngine();
 
-        // Test Applicant 1
-        System.out.println("----- Testing Applicant: " + a1.getName() + " -----");
-        List<MatchResult> r1 = engine.matchApplicant(a1, scholarshipList);
-
-        for (MatchResult r : r1) {
-            System.out.println(r);
-        }
-
-        // Test Applicant 2
-        System.out.println("\n----- Testing Applicant: " + a2.getName() + " -----");
-        List<MatchResult> r2 = engine.matchApplicant(a2, scholarshipList);
-
-        for (MatchResult r : r2) {
-            System.out.println(r);
-        }
+      
+        testApplicant(engine, a1, scholarshipList);
+        testApplicant(engine, a2, scholarshipList);
+        testApplicant(engine, a3, scholarshipList);
+        testApplicant(engine, a4, scholarshipList);
 
         System.out.println("\nTEST COMPLETE — Matching Engine functional.");
     }
+
+
+    private static void testApplicant(MatchingEngine engine,
+                                      Applicant applicant,
+                                      List<Scholarship> scholarships) {
+
+        System.out.println("\n----- Testing Applicant: " + applicant.getName() + " -----");
+
+        List<MatchResult> results = engine.matchApplicant(applicant, scholarships);
+
+        if (results.isEmpty()) {
+            System.out.println("No matches found.");
+        } else {
+            for (MatchResult r : results) {
+                System.out.println(r);
+            }
+        }
+    }
 }
+
