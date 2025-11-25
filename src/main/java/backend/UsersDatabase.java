@@ -1,3 +1,5 @@
+package backend;
+
 public class UsersDatabase {
 
     // Retrieve a user from the users csv table
@@ -12,7 +14,7 @@ public class UsersDatabase {
         return false;
     }
 
-    // Remove a new user to the users csv table
+    // Remove a user from the users csv table
     public static boolean removeUser() {
         // TODO
         return false;
