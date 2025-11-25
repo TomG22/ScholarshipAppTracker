@@ -3,7 +3,7 @@ package backend;
 import java.util.*;
 
 
-public class MatchingEngineTests {
+public class MatchingEngineTest {
 
     public static void main(String[] args) {
 
