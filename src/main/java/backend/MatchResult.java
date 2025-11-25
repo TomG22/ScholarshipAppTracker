@@ -1,38 +1,24 @@
 package backend;
 
 /**
- * Represents the result of matching one Applicant to one Scholarship.
- *
- * Supports:
- *  - ME-005 Match Ranking Output (implements Comparable for sorting)
- *  - ME-006 Logging and Traceability (reason field)
+ * Result of matching an Applicant to a Scholarship.
+ * Implements Comparable so we can sort by score.
  */
 public class MatchResult implements Comparable<MatchResult> {
 
     private final Applicant applicant;
     private final Scholarship scholarship;
-    private final double score;   // 0.0 – 1.0
-    private final String reason;  // explanation text
+    private final double score;
+    private final String explanation;
 
     public MatchResult(Applicant applicant,
                        Scholarship scholarship,
                        double score,
-                       String reason) {
-
-        if (applicant == null) {
-            throw new IllegalArgumentException("applicant cannot be null");
-        }
-        if (scholarship == null) {
-            throw new IllegalArgumentException("scholarship cannot be null");
-        }
-        if (score < 0.0 || score > 1.0) {
-            throw new IllegalArgumentException("score must be between 0.0 and 1.0");
-        }
-
+                       String explanation) {
         this.applicant = applicant;
         this.scholarship = scholarship;
         this.score = score;
-        this.reason = (reason == null) ? "" : reason;
+        this.explanation = explanation;
     }
 
     public Applicant getApplicant() {
@@ -47,23 +33,27 @@ public class MatchResult implements Comparable<MatchResult> {
         return score;
     }
 
-    public String getReason() {
-        return reason;
+    public String getExplanation() {
+        return explanation;
     }
 
-   
     @Override
     public int compareTo(MatchResult other) {
-        return Double.compare(other.score, this.score);
+        // Sort by score descending; tie-break on scholarship then applicant name
+        int cmp = Double.compare(other.score, this.score);
+        if (cmp != 0) return cmp;
+        cmp = this.scholarship.getName().compareTo(other.scholarship.getName());
+        if (cmp != 0) return cmp;
+        return this.applicant.getName().compareTo(other.applicant.getName());
     }
 
     @Override
     public String toString() {
         return "MatchResult{" +
-                "applicant='" + applicant.getName() + '\'' +
-                ", scholarship='" + scholarship.getName() + '\'' +
-                ", score=" + String.format("%.3f", score) +
-                ", reason='" + reason + '\'' +
+                "applicant=" + applicant.getName() +
+                ", scholarship=" + scholarship.getName() +
+                ", score=" + score +
+                ", explanation='" + explanation + '\'' +
                 '}';
     }
 }
