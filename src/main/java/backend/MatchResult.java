@@ -1,8 +1,8 @@
 package backend;
 
 /**
- * Result of matching an Applicant to a Scholarship.
- * Implements Comparable so we can sort by score.
+ * MatchResult – represents the result of matching one Applicant to one Scholarship.
+ * Implements Comparable so results can be sorted by score (highest first).
  */
 public class MatchResult implements Comparable<MatchResult> {
 
@@ -15,6 +15,10 @@ public class MatchResult implements Comparable<MatchResult> {
                        Scholarship scholarship,
                        double score,
                        String explanation) {
+        if (applicant == null) throw new IllegalArgumentException("Applicant cannot be null");
+        if (scholarship == null) throw new IllegalArgumentException("Scholarship cannot be null");
+        if (explanation == null) explanation = "";
+
         this.applicant = applicant;
         this.scholarship = scholarship;
         this.score = score;
@@ -39,11 +43,14 @@ public class MatchResult implements Comparable<MatchResult> {
 
     @Override
     public int compareTo(MatchResult other) {
-        // Sort by score descending; tie-break on scholarship then applicant name
+       
         int cmp = Double.compare(other.score, this.score);
         if (cmp != 0) return cmp;
+
+        
         cmp = this.scholarship.getName().compareTo(other.scholarship.getName());
         if (cmp != 0) return cmp;
+
         return this.applicant.getName().compareTo(other.applicant.getName());
     }
 
