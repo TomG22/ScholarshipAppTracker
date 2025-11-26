@@ -61,3 +61,5 @@ public class LoginSystem {
      */
     public User getCurrentUser() {
         return currentUser;
+    }
+}
