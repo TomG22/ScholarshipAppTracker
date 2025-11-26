@@ -7,7 +7,7 @@ SRC_MAIN = src/main/java
 SRC_TEST = src/tests/java
 
 # Packages to compile in main source
-PKGS_MAIN = backend matchingengine
+PKGS_MAIN = backend
 
 # Packages to compile in test source
 PKGS_TEST = backend
@@ -25,10 +25,9 @@ SRC_TEST_FILES = $(foreach pkg,$(PKGS_TEST),$(wildcard $(SRC_TEST)/$(pkg)/*.java
 all: build-tests
 
 # Compile main sources
-build:
-	$(BUILD)/.compiled_main
+build: $(BUILD)/.compiled_main
 
-# Compile main sources
+# Actually compile main sources
 $(BUILD)/.compiled_main: $(SRC_MAIN_FILES)
 	mkdir -p $(BUILD)
 	$(JAVAC) -d $(BUILD) $(SRC_MAIN_FILES)
@@ -46,5 +45,4 @@ $(BUILD)/.compiled_tests: $(SRC_TEST_FILES)
 clean:
 	rm -rf $(BUILD)
 
-.PHONY: build build-tests clean
-
+.PHONY: all build build-tests clean
