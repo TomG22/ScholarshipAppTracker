@@ -1,65 +1,115 @@
 package backend;
 
-/**
- * LoginSystem – Handles login/logout state for the application.
- * Works with UsersDatabase and User objects.
- *
- * Supports:
- *  - FR-003 Login and Authentication
- *  - BA-006 Role-Based Access Control (RBAC)
- */
+import java.security.MessageDigest;
+import java.util.HexFormat;
+import java.util.Scanner;
+
 public class LoginSystem {
 
-    private static User currentUser = null;
+    User client;
 
-    /**
-     * Attempts to authenticate a user with given credentials.
-     *
-     * @param name      Username (NetID or name)
-     * @param password  Password associated with the user
-     * @return true if login successful, false otherwise
-     */
-    public boolean login(String name, String password) {
-
-        // Prevent logging in twice
-        if (currentUser != null) {
-            System.out.println("A user is already logged in: " + currentUser.getName());
-            return false;
-        }
-
-        User user = UsersDatabase.getUser(name, password);
-
-        if (user == null) {
-            System.out.println("Invalid username or password.");
-            return false;
-        }
-
-        currentUser = user;
-        System.out.println("Login successful: " + currentUser.getName()
-                + " (" + currentUser.getRole() + ")");
-        return true;
+    public User getClient() {
+        return client;
     }
 
-    /**
-     * Logs out the current user.
-     *
-     * @return true if logout happened, false otherwise
-     */
-    public boolean logout() {
-        if (currentUser == null) {
-            System.out.println("No user is currently logged in.");
-            return false;
-        }
+    public String encStr(String str) {
+        try {
+            // Get a sha-256 byte array of the string 
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] buf = md.digest(str.getBytes());
 
-        System.out.println("User logged out: " + currentUser.getName());
-        currentUser = null;
-        return true;
+            // Convert the byte array to a hex and then to a string 
+            return HexFormat.of().formatHex(buf);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    /**
-     * @return the currently logged-in user, or null if none
-     */
-    public User getCurrentUser() {
-        return currentUser;
+    // Prompts for a user to sign in until they have signed in
+    public void signIn() {
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            // Prompt for the user's login details
+            System.out.print("Enter your netID: ");
+            String netId = scanner.next();
+
+            System.out.print("Enter your password: ");
+            String password = scanner.next();
+
+            // Check if the user exists
+            User client = UsersDatabase.getUser(netId);
+
+            if (client == null) {
+                System.out.println("User does not exist. Please enter a valid user or create a new account.");
+                continue;
+            }
+
+            // If the user exists, attempt to log them in
+            String encPassword = encStr(password);
+
+            // The user entered the wrong password for the given account
+            if (!UsersDatabase.authUser(netId, encPassword)) {
+                System.out.println("Incorrect password. Please try again.");
+                continue;
+            }
+
+            // The user successfully logged in
+            scanner.close();
+            break;
+        }
+    }
+
+    public void signOut() {
+        client = null;
+    }
+
+    public void createAccount(User.RoleType role) {
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            // Prompt for netID
+            System.out.print("Enter your netID: ");
+            String netId = scanner.next();
+
+            // Check if user already exists
+            if (UsersDatabase.getUser(netId) != null) {
+                System.out.println("An account with this netID already exists. Please choose a different netID.");
+                continue;
+            }
+
+            // Prompt for full name
+            System.out.print("Enter your full name: ");
+            scanner.nextLine();  // clear newline
+            String name = scanner.nextLine();
+
+            // Password + confirmation
+            System.out.print("Enter a password: ");
+            String password = scanner.next();
+
+            System.out.print("Confirm your password: ");
+            String confirmPassword = scanner.next();
+
+            while (!password.equals(confirmPassword)) {
+                System.out.println("Passwords do not match. Try again.");
+                System.out.print("Confirm your password: ");
+                confirmPassword = scanner.next();
+                continue;
+            }
+
+            // Encrypt password
+            String encPassword = encStr(password);
+
+            // Create user
+            User newUser = new User(netId, name, encPassword, role);
+
+            // Add user to database
+            UsersDatabase.addUser(newUser);
+
+            System.out.println("Account created successfully for role: " + role);
+            scanner.close();
+            break;
+        }
     }
 }

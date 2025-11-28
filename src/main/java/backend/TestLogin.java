@@ -6,15 +6,10 @@ public class TestLogin {
         LoginSystem loginSys = new LoginSystem();
 
         // Try to log in a user (replace with actual test credentials)
-        boolean loggedIn = loginSys.login("testUser", "testPassword");
-
-        if (!loggedIn) {
-            System.out.println("Login failed. Cannot proceed with role-based message.");
-            return;
-        }
+        loginSys.signIn();
 
         // Get the currently logged-in user
-        User client = loginSys.getCurrentUser();
+        User client = loginSys.getClient();
 
         if (client == null) {
             System.out.println("No user is currently logged in.");
@@ -40,6 +35,6 @@ public class TestLogin {
         }
 
         // Optional: log out at the end
-        loginSys.logout();
+        loginSys.signOut();
     }
 }

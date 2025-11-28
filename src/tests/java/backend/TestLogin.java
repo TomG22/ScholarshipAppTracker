@@ -5,25 +5,12 @@ public class TestLogin {
         // Initialize the login helper
         LoginSystem loginSys = new LoginSystem();
 
-        // Try to log in a user (replace with actual test credentials)
-        boolean loggedIn = loginSys.login("testUser", "testPassword");
+        // Sign in a user
+        loginSys.signIn();
 
-        if (!loggedIn) {
-            System.out.println("Login failed. Cannot proceed with role-based message.");
-            return;
-        }
-
-        // Get the currently logged-in user
-        User client = loginSys.getCurrentUser();
-
-        if (client == null) {
-            System.out.println("No user is currently logged in.");
-            return;
-        }
-
-        String clientName = client.getName();
-
-        switch (client.getRole()) {
+        // Output when the user has logged in
+        String clientName = loginSys.getClient().getName();
+        switch (loginSys.getClient().getRole()) {
             case APPLICANT:
                 System.out.println("Applicant " + clientName + " has successfully logged in");
                 break;
@@ -33,14 +20,12 @@ public class TestLogin {
             case SCHOLARSHIP_PROVIDER:
                 System.out.println("Scholarship Provider " + clientName + " has successfully logged in");
                 break;
-            default:
-                System.out.println("User " + clientName + " with role " + client.getRole()
-                        + " has successfully logged in");
-                break;
         }
 
-        // Optional: log out at the end
-        loginSys.logout();
+        loginSys.signOut();
+
+        if (loginSys.getClient() == null) {
+            System.out.println("Successfully logged out " + clientName);
+        }
     }
 }
-
