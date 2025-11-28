@@ -11,17 +11,13 @@ public class MatchingEngineRequirementsTest {
         Applicant csGood = new Applicant(
                 "Good CS",
                 "Computer Science",
-                3.8,
-                Arrays.asList("coding", "ai"),
-                Arrays.asList("leadership")
+                3.8
         );
 
         Applicant csLowGpa = new Applicant(
                 "Low GPA",
                 "Computer Science",
-                2.5,
-                Arrays.asList("coding"),
-                Arrays.asList("service")
+                2.5
         );
 
         Scholarship stemHonors = new Scholarship(

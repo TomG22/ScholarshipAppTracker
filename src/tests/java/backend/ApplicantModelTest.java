@@ -12,24 +12,18 @@ public class ApplicantModelTest {
         Applicant a = new Applicant(
                 "Test Student",
                 "Computer Science",
-                3.6,
-                Arrays.asList("coding", "ai"),
-                Arrays.asList("leadership", "volunteer")
+                3.6
         );
 
         System.out.println("\nName: " + a.getName());
         System.out.println("Major: " + a.getMajor());
         System.out.println("GPA: " + a.getGpa());
-        System.out.println("Skills: " + a.getSkills());
-        System.out.println("Tags: " + a.getTags());
 
         // Edge case: low GPA
         Applicant lowGpa = new Applicant(
                 "Low GPA",
                 "Math",
-                2.1,
-                Arrays.asList("calculus"),
-                Arrays.asList("research")
+                2.1
         );
 
         System.out.println("\nLow GPA Applicant: " + lowGpa.getName() + " (GPA=" + lowGpa.getGpa() + ")");

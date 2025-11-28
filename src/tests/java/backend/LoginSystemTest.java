@@ -32,7 +32,7 @@ public class LoginSystemTest {
         System.out.println("\nTest 5: login as admin");
         boolean ok5 = login.login("admin", "admin123");
         System.out.println("Result: " + ok5 +
-                ", role = " + login.getCurrentUserRole());
+                ", role = " + login.getCurrentUser().getRole());
 
         System.out.println("\nLoginSystem tests complete.");
     }

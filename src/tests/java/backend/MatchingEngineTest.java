@@ -12,33 +12,25 @@ public class MatchingEngineTest {
         Applicant a1 = new Applicant(
                 "Samiur R",
                 "Computer Science",
-                3.9,
-                Arrays.asList("ai", "machine learning", "coding"),
-                Arrays.asList("leadership", "volunteer")
+                3.9
         );
 
         Applicant a2 = new Applicant(
                 "Tom G",
                 "Software Engineering",
-                3.4,
-                Arrays.asList("java", "backend"),
-                Arrays.asList("teamwork", "research")
+                3.4
         );
 
         Applicant a3 = new Applicant(
                 "Lainey W",
                 "Information Science",
-                3.7,
-                Arrays.asList("design", "ux"),
-                Arrays.asList("service", "organization")
+                3.7
         );
 
         Applicant a4 = new Applicant(
                 "Sarah J",
                 "Business",
-                3.2,
-                Arrays.asList("marketing", "analytics"),
-                Arrays.asList("finance", "management")
+                3.2
         );
 
         // --- Create scholarships ---

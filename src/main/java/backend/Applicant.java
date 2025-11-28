@@ -11,15 +11,10 @@ public class Applicant {
     private final String name;
     private final String major;
     private final double gpa;
-    private final Set<String> essayKeywords;
-    private final Set<String> extracurricularKeywords;
 
     public Applicant(String name,
                      String major,
-                     double gpa,
-                     Collection<String> essayKeywords,
-                     Collection<String> extracurricularKeywords) {
-
+                     double gpa) {
         this.name = Objects.requireNonNull(name, "name cannot be null");
         this.major = Objects.requireNonNull(major, "major cannot be null");
 
@@ -27,25 +22,9 @@ public class Applicant {
             throw new IllegalArgumentException("GPA must be 0.0 – 4.0");
         }
         this.gpa = gpa;
-
-        this.essayKeywords = new HashSet<>();
-        if (essayKeywords != null)
-            essayKeywords.forEach(k -> this.essayKeywords.add(k.toLowerCase()));
-
-        this.extracurricularKeywords = new HashSet<>();
-        if (extracurricularKeywords != null)
-            extracurricularKeywords.forEach(k -> this.extracurricularKeywords.add(k.toLowerCase()));
     }
 
     public String getName() { return name; }
     public String getMajor() { return major; }
     public double getGpa() { return gpa; }
-
-    public Set<String> getEssayKeywords() {
-        return new HashSet<>(essayKeywords);
-    }
-
-    public Set<String> getExtracurricularKeywords() {
-        return new HashSet<>(extracurricularKeywords);
-    }
 }

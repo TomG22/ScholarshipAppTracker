@@ -75,6 +75,7 @@ public class MatchingEngine {
         // ------------------------------
         // ME-003: Keyword Matching
         // ------------------------------
+        /*
         Set<String> applicantWords = new HashSet<>();
         a.getEssayKeywords().forEach(k -> applicantWords.add(k.toLowerCase()));
         a.getExtracurricularKeywords().forEach(k -> applicantWords.add(k.toLowerCase()));
@@ -89,6 +90,7 @@ public class MatchingEngine {
             why.append("Contains required keywords. ");
             score += KEYWORD_WEIGHT;
         }
+        */
 
         score = Math.min(1.0, score); // safety clamp
 
