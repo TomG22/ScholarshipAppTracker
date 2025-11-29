@@ -1,6 +1,7 @@
 package backend;
 
-public class TestUserDatabase {
+public class TestUsersDatabase {
+
     public static boolean testUserAddSuccess(User dummyUser) {
         boolean addUserResult = UsersDatabase.addUser(dummyUser);
         return addUserResult;

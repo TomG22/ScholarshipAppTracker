@@ -8,9 +8,11 @@ import java.io.PrintWriter;
 
 public class UsersDatabase {
 
+    private static final String DB_FILE_NAME = "usersDB.csv";
+
     // Retrieve a user from the users csv table
     public static User getUser(String netId) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("userData.csv"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(DB_FILE_NAME))) {
             String line;
             reader.readLine();
 
@@ -52,7 +54,7 @@ public class UsersDatabase {
         }
 
         // Append the new user to the CSV file
-        try (FileWriter fileWriter = new FileWriter("userData.csv", true);
+        try (FileWriter fileWriter = new FileWriter(DB_FILE_NAME, true);
                 PrintWriter writer = new PrintWriter(fileWriter)) {
 
             // Add the user's data as a new line in the CSV
@@ -74,7 +76,7 @@ public class UsersDatabase {
 
         try {
             // Read all users from the CSV file into a list
-            BufferedReader reader = new BufferedReader(new FileReader("userData.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader(DB_FILE_NAME));
             StringBuilder fileContents = new StringBuilder();
             String line;
 
@@ -96,7 +98,7 @@ public class UsersDatabase {
             reader.close();
 
             // Rewrite the file without the removed user
-            FileWriter fileWriter = new FileWriter("userData.csv");
+            FileWriter fileWriter = new FileWriter(DB_FILE_NAME);
             fileWriter.write(fileContents.toString());
             fileWriter.close();
 
@@ -108,7 +110,7 @@ public class UsersDatabase {
     }
 
     public static void clear() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("userData.csv"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(DB_FILE_NAME))) {
 
             // Only read the header
             String header = reader.readLine();
@@ -118,7 +120,7 @@ public class UsersDatabase {
                 return;
             }
 
-            try (FileWriter writer = new FileWriter("userData.csv")) {
+            try (FileWriter writer = new FileWriter(DB_FILE_NAME)) {
                 writer.write(header + "\n");
             }
 
@@ -128,7 +130,7 @@ public class UsersDatabase {
     }
 
     public static boolean isEmpty() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("userData.csv"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(DB_FILE_NAME))) {
 
             String header = reader.readLine();
 
