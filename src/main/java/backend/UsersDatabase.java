@@ -29,7 +29,7 @@ public class UsersDatabase {
                     String password = userEntry[2];
                     User.RoleType role = User.RoleType.valueOf(userEntry[3]);
 
-                    return new User(netId, name, password, role);
+                    return new User(currNetId, name, password, role);
                 }
             }
 
