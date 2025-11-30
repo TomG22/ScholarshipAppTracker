@@ -2,46 +2,43 @@
 JAVAC = javac
 JAVA  = java
 
-# Source directories
+# Paths
 SRC_MAIN = src/main/java
 SRC_TEST = src/tests/java
+BUILD = build
+LIBS = lib
 
-# Packages to compile in main source
+# External JARs (semicolon for Windows, colon for Linux/Mac)
+CLASSPATH = $(BUILD):$(LIBS)/*
+
+# Packages
 PKGS_MAIN = backend
-
-# Packages to compile in test source
 PKGS_TEST = backend
 
-# Build directory
-BUILD = build
-
-# Collect all Java files from main packages
+# Java files
 SRC_MAIN_FILES = $(foreach pkg,$(PKGS_MAIN),$(wildcard $(SRC_MAIN)/$(pkg)/*.java))
-
-# Collect all Java files from test packages
 SRC_TEST_FILES = $(foreach pkg,$(PKGS_TEST),$(wildcard $(SRC_TEST)/$(pkg)/*.java))
 
-# Default target: build all main and test code
+# Default target
 all: build-tests
 
-# Compile main sources
+# Compile main code
 build: $(BUILD)/.compiled_main
 
-# Actually compile main sources
 $(BUILD)/.compiled_main: $(SRC_MAIN_FILES)
 	mkdir -p $(BUILD)
-	$(JAVAC) -d $(BUILD) $(SRC_MAIN_FILES)
+	$(JAVAC) -cp $(CLASSPATH) -d $(BUILD) $(SRC_MAIN_FILES)
 	touch $(BUILD)/.compiled_main
 
-# Compile test sources
+# Compile test code
 build-tests: build $(BUILD)/.compiled_tests
 
 $(BUILD)/.compiled_tests: $(SRC_TEST_FILES)
 	mkdir -p $(BUILD)
-	$(JAVAC) -d $(BUILD) -cp $(BUILD) $(SRC_TEST_FILES)
+	$(JAVAC) -cp $(CLASSPATH) -d $(BUILD) $(SRC_TEST_FILES)
 	touch $(BUILD)/.compiled_tests
 
-# Clean everything
+# Clean
 clean:
 	rm -rf $(BUILD)
 

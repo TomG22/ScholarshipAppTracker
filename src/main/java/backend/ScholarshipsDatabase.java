@@ -21,7 +21,7 @@ public class ScholarshipsDatabase {
 
     public static Scholarship getScholarship(String name) {
         try (BufferedReader reader = new BufferedReader(new FileReader(DB_FILE_NAME))) {
-            String line = reader.readLine(); // header
+            String line = reader.readLine();
 
             while ((line = reader.readLine()) != null) {
                 String[] entry = line.split(",", -1);

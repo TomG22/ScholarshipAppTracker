@@ -2,35 +2,21 @@ package backend;
 
 import java.util.*;
 
-/**
- * Scholarship model used for the MatchingEngine.
- *
- * Supports:
- *  - ME-001 (min GPA gate)
- *  - ME-002 (eligible majors)
- *  - ME-003 (required keywords)
- */
 public class Scholarship {
 
     private final String name;
     private final double minGpa;
-    private final Set<String> eligibleMajors;     // lowercased
-    private final Set<String> requiredKeywords;   // lowercased
+    private final Set<String> eligibleMajors;
+    private final Set<String> requiredKeywords;
 
-    /**
-     * Constructor matching MatchingEngineTest usage.
-     *
-     * @param name              human-readable scholarship name
-     * @param minGpa            minimum GPA needed (0.0–4.0)
-     * @param eligibleMajors    list of allowed majors (e.g. "computer science"); empty = any major
-     * @param requiredKeywords  list of required keywords; empty = no keyword constraints
-     */
     public Scholarship(String name,
                        double minGpa,
                        Collection<String> eligibleMajors,
                        Collection<String> requiredKeywords) {
 
-        this.name = Objects.requireNonNull(name, "name cannot be null");
+        if (name == null || name.isEmpty())
+            throw new IllegalArgumentException("Name cannot be null or empty.");
+        this.name = name;
 
         if (minGpa < 0.0 || minGpa > 4.0) {
             throw new IllegalArgumentException("minGpa must be between 0.0 and 4.0");
@@ -64,16 +50,10 @@ public class Scholarship {
         return minGpa;
     }
 
-    /**
-     * Eligible majors as lowercase strings.
-     */
     public Set<String> getEligibleMajors() {
         return new HashSet<>(eligibleMajors);
     }
 
-    /**
-     * Required keywords as lowercase strings.
-     */
     public Set<String> getRequiredKeywords() {
         return new HashSet<>(requiredKeywords);
     }
@@ -81,10 +61,10 @@ public class Scholarship {
     @Override
     public String toString() {
         return "Scholarship{" +
-                "name='" + name + '\'' +
-                ", minGpa=" + minGpa +
-                ", eligibleMajors=" + eligibleMajors +
-                ", requiredKeywords=" + requiredKeywords +
+                "\tname=" + name + '\n' +
+                "\tminGpa=" + minGpa + '\n' +
+                "\teligibleMajors=" + eligibleMajors + '\n' +
+                "\trequiredKeywords=" + requiredKeywords + '\n' +
                 '}';
     }
 }
