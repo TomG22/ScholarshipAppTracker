@@ -97,13 +97,13 @@ public class Scholarship {
 
     public boolean addApplication(Application application) {
         boolean addResult = applications.add(application);
-        //update database
+        ApplicationsDatabase.addApplication(application);
         return addResult;
     }
 
     public boolean removeApplication(Application application) {
         boolean removeResult = applications.remove(application);
-        //update database
+        ApplicationsDatabase.removeApplication(application.getID());
         return removeResult;
     }
 

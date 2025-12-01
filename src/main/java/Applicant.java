@@ -54,8 +54,14 @@ public class Applicant extends User {
     public double getAwardBalance() { return awardBalance; }
 
     public Set<Application> getApplications() {
-        //database lookup
-        return null;
+        Set<Application> applications = new HashSet<Application>();
+
+        for (Application application : ApplicationsDatabase.getAllApplications()) {
+            if (application.getAuthor().getID() == getID())
+                applications.add(application);
+        }
+
+        return applications;
     }
 
     public Set<String> getEssayWords() {
@@ -78,7 +84,7 @@ public class Applicant extends User {
 
     public void setAwardBalance(double awardBalance) {
         this.awardBalance = awardBalance;
-        //update database
+        UsersDatabase.removeUser(getID());
+        UsersDatabase.addUser(this);
     }
 }
-

@@ -5,6 +5,55 @@ public class ApplicationsDatabase {
 
     private static final String DB_FILE_NAME = "applicationsDB.csv";
 
+    public static Set<Application> getAllApplications() {
+        Set<Application> applications = new HashSet<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(DB_FILE_NAME))) {
+            reader.readLine();
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] entry = line.split(",", -1);
+                if (entry.length < 5) continue;
+
+                UUID currID;
+                try {
+                    currID = UUID.fromString(entry[0]);
+                } catch (Exception e) {
+                    continue;
+                }
+
+                String essay = entry[1];
+
+                UUID authorID;
+                try {
+                    authorID = UUID.fromString(entry[2]);
+                } catch (Exception e) {
+                    continue;
+                }
+
+                Application.ApplicationStatus status;
+                try {
+                    status = Application.ApplicationStatus.valueOf(entry[3]);
+                } catch (Exception e) {
+                    continue;
+                }
+
+                boolean awarded = Boolean.parseBoolean(entry[4]);
+
+                User author = UsersDatabase.getUser(authorID);
+                if (author == null) continue;
+
+                applications.add(new Application(currID, essay, author, status, awarded));
+            }
+
+        } catch (IOException e) {
+            System.err.println("Error reading applications: " + e.getMessage());
+        }
+
+        return applications;
+    }
+
     public static Application getApplication(UUID id) {
         try (BufferedReader reader = new BufferedReader(new FileReader(DB_FILE_NAME))) {
 
@@ -53,15 +102,15 @@ public class ApplicationsDatabase {
             return false;
 
         try (FileWriter fw = new FileWriter(DB_FILE_NAME, true);
-             PrintWriter writer = new PrintWriter(fw)) {
+                PrintWriter writer = new PrintWriter(fw)) {
 
             writer.println(
-                app.getID().toString() + "," +
-                escapeCSV(app.getEssay()) + "," +
-                app.getAuthor().getID().toString() + "," +
-                app.getStatus().name() + "," +
-                app.wasAwarded()
-            );
+                    app.getID().toString() + "," +
+                    escapeCSV(app.getEssay()) + "," +
+                    app.getAuthor().getID().toString() + "," +
+                    app.getStatus().name() + "," +
+                    app.wasAwarded()
+                    );
 
             return true;
 
