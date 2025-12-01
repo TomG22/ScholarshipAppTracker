@@ -2,8 +2,7 @@ import java.util.*;
 
 public class Application {
 
-    
-    public enum ApplicationState {
+    public enum ApplicationStatus {
         IN_PROGRESS,
         SUBMITTED,
         REVIEWED,
@@ -11,7 +10,8 @@ public class Application {
 
     private final String essay;
     private final User author;
-    private final ApplicationState state;
+    private final ApplicationStatus status;
+    private final boolean awarded;
     
     public Application(String essay, User author) {
 
@@ -23,7 +23,8 @@ public class Application {
             throw new IllegalArgumentException("Author cannot be null.");
         this.author = author;
 
-        this.state = ApplicationState.IN_PROGRESS;
+        this.status = ApplicationStatus.IN_PROGRESS;
+        this.awarded = false;
     }
 
     public String getEssay() {
@@ -49,8 +50,12 @@ public class Application {
         return author;
     }
 
-    public ApplicationState getState() {
-        return state;
+    public ApplicationStatus getStatus() {
+        return status;
+    }
+
+    public boolean wasAwarded() {
+        return awarded;
     }
 
     @Override

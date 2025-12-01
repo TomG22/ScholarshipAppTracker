@@ -7,6 +7,13 @@ public class Scholarship {
     private final double minGpa;
     private final Set<String> eligibleMajors;
     private final Set<String> requiredKeywords;
+    private final ScholarshipStatus status;
+
+    public enum ScholarshipStatus {
+        OPEN,
+        PENDING,
+        AWARDED,
+    }
 
     public Scholarship(String name,
                        double awardAmount,
@@ -33,6 +40,8 @@ public class Scholarship {
         if (requiredKeywords == null)
             throw new IllegalArgumentException("Required Keywords cannot be null.");
         this.requiredKeywords = new HashSet<>(requiredKeywords);
+
+        this.status = ScholarshipStatus.OPEN;
     }
 
     public String getName() {
