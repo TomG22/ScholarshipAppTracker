@@ -11,6 +11,7 @@ import java.util.*;
  *  - ME-005 Match Ranking Output
  *  - ME-006 Logging and Traceability
  *  - ME-007 Match Update on Data Change
+ *  - ME-012 Top Three Award Selection
  *  - NFR-017 Matching Performance
  */
 public class MatchingEngine {
@@ -32,8 +33,9 @@ public class MatchingEngine {
             match.ifPresent(results::add);
         }
 
-        // Sort by score descending (ME-005)
+        // ME-005: Sort by score descending
         Collections.sort(results);
+
         return results;
     }
 
@@ -46,9 +48,9 @@ public class MatchingEngine {
         StringBuilder why = new StringBuilder();
         double score = 0.0;
 
-        // ------------------------------
+        
         // ME-001: GPA Eligibility Filter
-        // ------------------------------
+        
         if (a.getGpa() < s.getMinGpa()) {
             why.append("Rejected: GPA below minimum. ");
             return Optional.empty();
@@ -56,11 +58,12 @@ public class MatchingEngine {
         why.append("Meets GPA requirement. ");
         score += GPA_WEIGHT * normalizeGpa(a.getGpa(), s.getMinGpa());
 
-        // ------------------------------
+        
         // ME-002: Major Compatibility
-        // ------------------------------
+       
         if (!s.getEligibleMajors().isEmpty()) {
             String major = a.getMajor().toLowerCase();
+
             if (!s.getEligibleMajors().contains(major)) {
                 why.append("Rejected: Major not eligible. ");
                 return Optional.empty();
@@ -70,28 +73,30 @@ public class MatchingEngine {
             }
         }
 
-        // ------------------------------
+       
         // ME-003: Keyword Matching
-        // ------------------------------
-        /*
+       
         Set<String> applicantWords = new HashSet<>();
         a.getEssayKeywords().forEach(k -> applicantWords.add(k.toLowerCase()));
         a.getExtracurricularKeywords().forEach(k -> applicantWords.add(k.toLowerCase()));
 
         if (!s.getRequiredKeywords().isEmpty()) {
+
             for (String kw : s.getRequiredKeywords()) {
                 if (!applicantWords.contains(kw.toLowerCase())) {
-                    why.append("Rejected: Missing keyword '" + kw + "'. ");
+                    why.append("Rejected: Missing keyword '").append(kw).append("'. ");
                     return Optional.empty();
                 }
             }
+
             why.append("Contains required keywords. ");
             score += KEYWORD_WEIGHT;
         }
-        */
 
-        score = Math.min(1.0, score); // safety clamp
+        // Normalize
+        score = Math.min(1.0, score);
 
+        // Logging (ME-006)
         return Optional.of(new MatchResult(a, s, score, why.toString()));
     }
 
@@ -112,4 +117,22 @@ public class MatchingEngine {
                                                      Collection<Scholarship> scholarships) {
         return matchApplicant(a, scholarships);
     }
+
+    /**
+     * ME-012 — Return the top N matches for an applicant.
+     * This is useful for “Top 3 Candidates” requirement.
+     */
+    public List<MatchResult> topMatches(Applicant applicant,
+                                        Collection<Scholarship> scholarships,
+                                        int maxResults) {
+
+        List<MatchResult> all = matchApplicant(applicant, scholarships);
+
+        if (all.size() <= maxResults) {
+            return new ArrayList<>(all);
+        }
+
+        return new ArrayList<>(all.subList(0, maxResults));
+    }
 }
+
