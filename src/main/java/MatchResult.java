@@ -1,3 +1,5 @@
+package backend;
+
 import java.time.LocalDateTime;
 
 /**
@@ -25,7 +27,7 @@ public class MatchResult implements Comparable<MatchResult> {
         this.scholarship = scholarship;
         this.score = score;
         this.explanation = explanation;
-        this.timestamp = LocalDateTime.now();  // add timestamp for auditing
+        this.timestamp = LocalDateTime.now(); // add timestamp for logging/audit
     }
 
     public Applicant getApplicant() { return applicant; }
