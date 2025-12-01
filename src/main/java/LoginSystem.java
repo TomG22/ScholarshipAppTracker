@@ -6,14 +6,6 @@ public class LoginSystem {
 
     public static User client;
 
-    public static User getClient() {
-        return client;
-    }
-
-    public static User.RoleType getClientRole() {
-        return client.getRole();
-    }
-
     public String encStr(String str) {
         try {
             // Get a sha-256 byte array of the string 
@@ -30,6 +22,10 @@ public class LoginSystem {
 
     // Prompts for a user to sign in until they have signed in
     public void signIn() {
+        if (UsersDatabase.getCurrentUser() != null)
+            System.out.println("A user is already signed in. Must log out first.");
+
+
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -41,7 +37,7 @@ public class LoginSystem {
             String password = scanner.next();
 
             // Check if the user exists
-            User client = UsersDatabase.getUser(netId);
+            User client = UsersDatabase.getUserByNetID(netId);
 
             if (client == null) {
                 System.out.println("User does not exist. Please enter a valid user or create a new account.");
@@ -76,7 +72,7 @@ public class LoginSystem {
             String netId = scanner.next();
 
             // Check if user already exists
-            if (UsersDatabase.getUser(netId) != null) {
+            if (UsersDatabase.getUserByNetID(netId) != null) {
                 System.out.println("An account with this netID already exists. Please choose a different netID.");
                 continue;
             }
@@ -104,10 +100,12 @@ public class LoginSystem {
             String encPassword = encStr(password);
 
             // Create user
-            User newUser = new User(netId, name, encPassword, role);
+            // Must replace with a switch case to add specific type of user
+            //User newUser = new User(netId, name, encPassword, role);
 
             // Add user to database
-            UsersDatabase.addUser(newUser);
+            // Add the specific type to the database
+            //UsersDatabase.addUser(newUser);
 
             System.out.println("Account created successfully for role: " + role);
             scanner.close();

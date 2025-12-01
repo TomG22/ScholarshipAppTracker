@@ -84,7 +84,7 @@ public class Applicant extends User {
 
     public void setAwardBalance(double awardBalance) {
         this.awardBalance = awardBalance;
-        UsersDatabase.removeUser(getID());
-        UsersDatabase.addUser(this);
+        ApplicantsDatabase.removeApplicant(getID());
+        ApplicantsDatabase.addApplicant(this);
     }
 }
