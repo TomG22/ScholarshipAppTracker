@@ -4,7 +4,7 @@ JAVA  = java
 
 # Source and build folders
 SRC_MAIN = src/main/java
-SRC_TEST = src/tests/java
+SRC_TEST = src/test/java
 BUILD = build
 
 # External JARs (if any)
@@ -13,7 +13,7 @@ CLASSPATH = $(BUILD):$(LIBS)/*
 
 # All Java source files
 SRC_MAIN_FILES = $(wildcard $(SRC_MAIN)/*.java)
-SRC_TEST_FILES = $(wildcard $(SRC_TEST)/backend/*.java)
+SRC_TEST_FILES = $(wildcard $(SRC_TEST)/*.java)
 
 # Default target
 all: build-tests

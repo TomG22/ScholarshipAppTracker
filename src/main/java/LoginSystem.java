@@ -4,14 +4,14 @@ import java.util.Scanner;
 
 public class LoginSystem {
 
-    User client;
+    public static User client;
 
-    public User getClient() {
-        return this.client;
+    public static User getClient() {
+        return client;
     }
 
-    public User.RoleType getClientRole() {
-        return this.client.getRole();
+    public static User.RoleType getClientRole() {
+        return client.getRole();
     }
 
     public String encStr(String str) {

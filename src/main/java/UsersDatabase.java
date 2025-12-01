@@ -3,104 +3,131 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.UUID;
 
 public class UsersDatabase {
 
     private static final String DB_FILE_NAME = "usersDB.csv";
 
-    // Retrieve a user from the users csv table
-    public static User getUser(String netId) {
+    public static User getUser(UUID id) {
         try (BufferedReader reader = new BufferedReader(new FileReader(DB_FILE_NAME))) {
-            String line;
             reader.readLine();
+            String line;
 
             while ((line = reader.readLine()) != null) {
-                String[] userEntry = line.split(",", -1);
+                String[] entry = line.split(",", -1);
+                if (entry.length < 5) continue;
 
-                if (userEntry.length < 4) continue;
-
-                String currNetId = userEntry[0];
-
-                // Check that the name and password match
-                if (currNetId.equals(netId)) {
-                    String name = userEntry[1];
-                    String password = userEntry[2];
-                    User.RoleType role = User.RoleType.valueOf(userEntry[3]);
-
-                    return new User(currNetId, name, password, role);
+                UUID currId;
+                try {
+                    currId = UUID.fromString(entry[0]);
+                } catch (Exception ignored) {
+                    continue;
                 }
+
+                if (!currId.equals(id)) continue;
+
+                String netID = entry[1];
+                String name = entry[2];
+                String password = entry[3];
+                User.RoleType role = User.RoleType.valueOf(entry[4]);
+
+                return new User(currId, netID, name, password, role);
             }
 
         } catch (Exception e) {
             System.err.println("Error loading user: " + e.getMessage());
         }
+
         return null;
     }
 
-    // Authenticate a given user password
-    public static boolean authUser(String netId, String encPassword) { 
-        User user = getUser(netId);
+    public static User getUser(String netID) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(DB_FILE_NAME))) {
+            reader.readLine();
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] entry = line.split(",", -1);
+                if (entry.length < 5) continue;
+
+                String currNetID = entry[1];
+                if (!currNetID.equals(netID)) continue;
+
+                UUID id = UUID.fromString(entry[0]);
+                String name = entry[2];
+                String password = entry[3];
+                User.RoleType role = User.RoleType.valueOf(entry[4]);
+
+                return new User(id, currNetID, name, password, role);
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error loading user by netID: " + e.getMessage());
+        }
+
+        return null;
+    }
+
+    public static boolean authUser(String netID, String encPassword) {
+        User user = getUser(netID);
         return user != null && user.getPassword().equals(encPassword);
     }
 
-    // Add a new user to the users csv table
     public static boolean addUser(User user) {
-        // Check if the user already exists
-        if (getUser(user.getNetId()) != null) {
-            System.err.println("User with netId " + user.getNetId() + " already exists.");
+        if (user == null || getUser(user.getID()) != null)
             return false;
-        }
 
-        // Append the new user to the CSV file
-        try (FileWriter fileWriter = new FileWriter(DB_FILE_NAME, true);
-                PrintWriter writer = new PrintWriter(fileWriter)) {
+        try (FileWriter fw = new FileWriter(DB_FILE_NAME, true);
+             PrintWriter writer = new PrintWriter(fw)) {
 
-            // Add the user's data as a new line in the CSV
-            writer.println(user.getNetId() + "," + user.getName() + "," + user.getPassword() + "," + user.getRole().name());
+            writer.println(
+                user.getID() + "," +
+                user.getNetID() + "," +
+                user.getName() + "," +
+                user.getPassword() + "," +
+                user.getRole().name()
+            );
+
             return true;
 
         } catch (IOException e) {
-            System.err.println("Error writing to file: " + e.getMessage());
+            System.err.println("Error adding user: " + e.getMessage());
             return false;
         }
     }
 
-    // Remove a user from the users csv table
-    public static boolean removeUser(String netId) {
-        // Check if the user already exists
-        if (getUser(netId) == null) {
-            return false;
-        }
+    public static boolean removeUser(UUID id) {
+        if (getUser(id) == null) return false;
 
-        try {
-            // Read all users from the CSV file into a list
-            BufferedReader reader = new BufferedReader(new FileReader(DB_FILE_NAME));
-            StringBuilder fileContents = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new FileReader(DB_FILE_NAME))) {
+            StringBuilder out = new StringBuilder();
+            String header = reader.readLine();
+            if (header != null) out.append(header).append("\n");
+
             String line;
-
-            boolean headerRead = false;
             while ((line = reader.readLine()) != null) {
-                if (!headerRead) {
-                    fileContents.append(line).append("\n");
-                    headerRead = true;
+                String[] entry = line.split(",", -1);
+                if (entry.length < 1) continue;
+
+                UUID currId;
+                try {
+                    currId = UUID.fromString(entry[0]);
+                } catch (Exception ignored) {
                     continue;
                 }
 
-                String[] userEntry = line.split(",");
-                if (userEntry[0].equals(netId)) {
-                    continue;
-                }
+                if (currId.equals(id)) continue;
 
-                fileContents.append(line).append("\n");
+                out.append(line).append("\n");
             }
-            reader.close();
 
-            // Rewrite the file without the removed user
-            FileWriter fileWriter = new FileWriter(DB_FILE_NAME);
-            fileWriter.write(fileContents.toString());
-            fileWriter.close();
+            try (FileWriter fw = new FileWriter(DB_FILE_NAME)) {
+                fw.write(out.toString());
+            }
 
             return true;
+
         } catch (IOException e) {
             System.err.println("Error removing user: " + e.getMessage());
             return false;
@@ -109,44 +136,31 @@ public class UsersDatabase {
 
     public static void clear() {
         try (BufferedReader reader = new BufferedReader(new FileReader(DB_FILE_NAME))) {
-
-            // Only read the header
             String header = reader.readLine();
+            if (header == null || header.trim().isEmpty()) return;
 
-            if (header == null || header.trim().isEmpty()) {
-                System.err.println("CSV file has no header; cannot clear properly.");
-                return;
-            }
-
-            try (FileWriter writer = new FileWriter(DB_FILE_NAME)) {
-                writer.write(header + "\n");
+            try (FileWriter fw = new FileWriter(DB_FILE_NAME)) {
+                fw.write(header + "\n");
             }
 
         } catch (IOException e) {
-            System.err.println("Error clearing database: " + e.getMessage());
+            System.err.println("Error clearing users: " + e.getMessage());
         }
     }
 
     public static boolean isEmpty() {
         try (BufferedReader reader = new BufferedReader(new FileReader(DB_FILE_NAME))) {
-
-            String header = reader.readLine();
-
-            if (header == null) {
-                return false;
-            }
-
+            reader.readLine();
             String line;
+
             while ((line = reader.readLine()) != null) {
-                if (!line.trim().isEmpty()) {
-                    return false;
-                }
+                if (!line.trim().isEmpty()) return false;
             }
 
             return true;
 
         } catch (IOException e) {
-            System.err.println("Error checking if database is empty: " + e.getMessage());
+            System.err.println("Error checking empty: " + e.getMessage());
             return false;
         }
     }

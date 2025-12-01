@@ -13,11 +13,11 @@ public class TestScholarshipsDatabase {
     }
 
     public static boolean testScholarshipRemoveSuccess(Scholarship dummyScholarship) {
-        return ScholarshipsDatabase.removeScholarship(dummyScholarship.getName());
+        return ScholarshipsDatabase.removeScholarship(dummyScholarship.getID());
     }
 
     public static boolean testScholarshipRemoveFail(Scholarship dummyScholarship) {
-        return !ScholarshipsDatabase.removeScholarship(dummyScholarship.getName());
+        return !ScholarshipsDatabase.removeScholarship(dummyScholarship.getID());
     }
 
     public static boolean testClear() {

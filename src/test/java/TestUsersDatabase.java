@@ -12,11 +12,11 @@ public class TestUsersDatabase {
     }
 
     public static boolean testUserRemoveSuccess(User dummyUser) {
-        return UsersDatabase.removeUser(dummyUser.getNetId());
+        return UsersDatabase.removeUser(dummyUser.getID());
     }
 
     public static boolean testUserRemoveFail(User dummyUser) {
-        return !UsersDatabase.removeUser(dummyUser.getNetId());
+        return !UsersDatabase.removeUser(dummyUser.getID());
     }
 
     public static boolean testClear() {
