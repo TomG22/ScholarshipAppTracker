@@ -1,12 +1,17 @@
-package backend;
-
 import java.util.*;
 
 public class Application {
 
+    
+    public enum ApplicationState {
+        IN_PROGRESS,
+        SUBMITTED,
+        REVIEWED,
+    }
+
     private final String essay;
     private final User author;
-    // state? (submitted, in progress, awarded)
+    private final ApplicationState state;
     
     public Application(String essay, User author) {
 
@@ -17,6 +22,8 @@ public class Application {
         if (author == null)
             throw new IllegalArgumentException("Author cannot be null.");
         this.author = author;
+
+        this.state = ApplicationState.IN_PROGRESS;
     }
 
     public String getEssay() {
@@ -42,11 +49,15 @@ public class Application {
         return author;
     }
 
+    public ApplicationState getState() {
+        return state;
+    }
+
     @Override
     public String toString() {
         return "Application{\n" +
-                "\tessay=" + essay + '\n' +
-                "\tauthor=" + author + '\n' +
+                "\tEssay: " + essay + '\n' +
+                "\tAuthor: " + author + '\n' +
                 '}';
     }
 }

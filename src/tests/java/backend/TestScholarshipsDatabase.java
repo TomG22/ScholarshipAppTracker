@@ -1,7 +1,4 @@
-package backend;
-
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.Set;
 
 public class TestScholarshipsDatabase {
 
@@ -10,10 +7,7 @@ public class TestScholarshipsDatabase {
     }
 
     public static boolean testScholarshipAddFail(Scholarship dummyScholarship) {
-        // First add (should succeed)
         ScholarshipsDatabase.addScholarship(dummyScholarship);
-
-        // Second add (should fail — duplicate)
         boolean addResult = ScholarshipsDatabase.addScholarship(dummyScholarship);
         return !addResult;
     }
@@ -33,47 +27,41 @@ public class TestScholarshipsDatabase {
 
     public static void main(String[] args) {
 
-        // Dummy scholarship consistent with your constructor
         Scholarship dummy = new Scholarship(
                 "Test Scholarship",
+                3000.0,
                 3.0,
-                Arrays.asList("Computer Science", "Mathematics"),
-                Arrays.asList("leadership", "community service")
+                Set.of("Computer Science", "Mathematics"),
+                Set.of("leadership", "community service")
         );
 
         boolean passed = true;
 
-        // Clear DB first
         if (!testClear()) {
             System.out.println("Test: Failed to clear the scholarship database");
             passed = false;
         }
 
-        // Add success
         if (!testScholarshipAddSuccess(dummy)) {
             System.out.println("Test: Failed to add a new scholarship");
             passed = false;
         }
 
-        // Add duplicate fail
         if (!testScholarshipAddFail(dummy)) {
             System.out.println("Test: Failed to reject a duplicate scholarship");
             passed = false;
         }
 
-        // Remove success
         if (!testScholarshipRemoveSuccess(dummy)) {
             System.out.println("Test: Failed to remove an existing scholarship");
             passed = false;
         }
 
-        // Remove fail (non-existent)
         if (!testScholarshipRemoveFail(dummy)) {
             System.out.println("Test: Failed to reject removal of a non-existing scholarship");
             passed = false;
         }
 
-        // Test clear again
         if (!testClear()) {
             System.out.println("Test: Failed to clear the scholarship database");
             passed = false;

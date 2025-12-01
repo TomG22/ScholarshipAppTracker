@@ -1,5 +1,3 @@
-package backend;
-
 import java.io.File;
 
 public class ScholarshipProvider extends User {

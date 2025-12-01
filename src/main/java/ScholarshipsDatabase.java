@@ -1,5 +1,3 @@
-package backend;
-
 import java.io.*;
 import java.util.*;
 
@@ -25,17 +23,18 @@ public class ScholarshipsDatabase {
 
             while ((line = reader.readLine()) != null) {
                 String[] entry = line.split(",", -1);
-                if (entry.length < 4) continue;
+                if (entry.length < 5) continue;
 
                 String currName = entry[0];
                 if (!currName.equals(name)) continue;
 
-                double minGpa = Double.parseDouble(entry[1]);
+                double awardAmount = Double.parseDouble(entry[1]);
+                double minGpa = Double.parseDouble(entry[2]);
 
-                Set<String> majors = parseSet(entry[2]);
-                Set<String> keywords = parseSet(entry[3]);
+                Set<String> majors = parseSet(entry[3]);
+                Set<String> keywords = parseSet(entry[4]);
 
-                return new Scholarship(currName, minGpa, majors, keywords);
+                return new Scholarship(currName, awardAmount, minGpa, majors, keywords);
             }
         } catch (Exception e) {
             System.err.println("Error loading scholarship: " + e.getMessage());
@@ -55,10 +54,13 @@ public class ScholarshipsDatabase {
             String majors = String.join(";", s.getEligibleMajors());
             String keywords = String.join(";", s.getRequiredKeywords());
 
-            writer.println(s.getName() + "," +
-                           s.getMinGpa() + "," +
-                           majors + "," +
-                           keywords);
+            writer.println(
+                    s.getName() + "," +
+                    s.getAwardAmount() + "," +
+                    s.getMinGpa() + "," +
+                    majors + "," +
+                    keywords
+            );
             return true;
 
         } catch (IOException e) {

@@ -1,5 +1,3 @@
-package backend;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,6 +9,7 @@ public class Parser {
 
     private Scholarship parseScholarshipFromJSONObject(JSONObject json) {
         String name = json.getString("name");
+        double awardAmount = json.getDouble("awardAmount");
         double minGpa = json.getDouble("minGpa");
 
         Set<String> eligibleMajors = new HashSet<>();
@@ -29,11 +28,18 @@ public class Parser {
             }
         }
 
-        return new Scholarship(name, minGpa, eligibleMajors, requiredKeywords);
+        return new Scholarship(
+            name,
+            awardAmount,
+            minGpa,
+            eligibleMajors,
+            requiredKeywords
+        );
     }
 
     public Set<Scholarship> parseScholarships(File file) throws IOException {
-        if (file == null) throw new IllegalArgumentException("File cannot be null.");
+        if (file == null)
+            throw new IllegalArgumentException("File cannot be null.");
 
         String content = Files.readString(file.toPath());
         JSONArray array = new JSONArray(content);
@@ -67,7 +73,8 @@ public class Parser {
     }
 
     public Set<Application> parseApplications(File file) throws IOException {
-        if (file == null) throw new IllegalArgumentException("File cannot be null.");
+        if (file == null)
+            throw new IllegalArgumentException("File cannot be null.");
 
         String content = Files.readString(file.toPath());
         JSONArray array = new JSONArray(content);

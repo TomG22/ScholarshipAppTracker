@@ -1,7 +1,5 @@
-package backend;
-
-import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 public class MatchingEngineRequirementsTest {
 
@@ -9,29 +7,35 @@ public class MatchingEngineRequirementsTest {
         MatchingEngine engine = new MatchingEngine();
 
         Applicant csGood = new Applicant(
+                "cs01",
                 "Good CS",
+                "pass123",
                 "Computer Science",
                 3.8
         );
 
         Applicant csLowGpa = new Applicant(
+                "cs02",
                 "Low GPA",
+                "pass321",
                 "Computer Science",
                 2.5
         );
 
         Scholarship stemHonors = new Scholarship(
                 "STEM Honors Scholarship",
+                5000.0,
                 3.5,
-                Arrays.asList("computer science", "software engineering"),
-                Arrays.asList("coding", "ai")
+                Set.of("computer science", "software engineering"),
+                Set.of("coding", "ai")
         );
 
         Scholarship anyMajorLeadership = new Scholarship(
                 "Leadership Award",
+                1000.0,
                 3.0,
-                Arrays.asList(), // any major
-                Arrays.asList("leadership")
+                Set.of(),
+                Set.of("leadership")
         );
 
         List<Scholarship> scholarships = List.of(stemHonors, anyMajorLeadership);
@@ -48,6 +52,7 @@ public class MatchingEngineRequirementsTest {
     private static void printMatches(MatchingEngine engine,
                                      Applicant applicant,
                                      List<Scholarship> scholarships) {
+
         System.out.println("Applicant: " + applicant.getName()
                 + " (major=" + applicant.getMajor()
                 + ", gpa=" + applicant.getGpa() + ")");

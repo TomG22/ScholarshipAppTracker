@@ -1,9 +1,8 @@
-package backend;
-
 public class Applicant extends User {
 
     private final String major;
     private final double gpa;
+    private double awardBalance;
 
     public Applicant(String netId, String name, String password, String major, double gpa) {
         super(netId, name, password, RoleType.APPLICANT);
@@ -15,9 +14,15 @@ public class Applicant extends User {
         if (gpa < 0.0 || gpa > 4.0)
             throw new IllegalArgumentException("GPA must be 0.0 – 4.0");
         this.gpa = gpa;
+
+        this.awardBalance = 0.0;
     }
 
     public String getMajor() { return major; }
     public double getGpa() { return gpa; }
+    public double getAwardBalance() { return awardBalance; }
+    public void setAwardBalance(double awardBalance) {
+        this.awardBalance = awardBalance;
+    }
 }
 

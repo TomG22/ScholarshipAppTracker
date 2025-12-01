@@ -1,6 +1,4 @@
-package backend;
-
-import java.util.Arrays;
+import java.util.Set;
 
 public class ScholarshipModelTest {
 
@@ -10,27 +8,28 @@ public class ScholarshipModelTest {
 
         Scholarship s = new Scholarship(
                 "Engineering Excellence Scholarship",
+                5000,
                 3.5,
-                Arrays.asList("computer science", "electrical engineering"),
-                Arrays.asList("leadership", "research")
+                Set.of("computer science", "electrical engineering"),
+                Set.of("leadership", "research")
         );
 
-        System.out.println("\nName: " + s.getName());
-        System.out.println("Min GPA: " + s.getMinGpa());
-        System.out.println("Eligible Majors: " + s.getEligibleMajors());
-        System.out.println("Required Keywords: " + s.getRequiredKeywords());
-
+        System.out.println(s.toString());
         
         Scholarship open = new Scholarship(
                 "Open Major Scholarship",
+                2000,
                 3.0,
-                Arrays.asList(), 
-                Arrays.asList("service")
+                Set.of(), 
+                Set.of("service")
         );
 
-        System.out.println("\nOpen Scholarship:");
-        System.out.println("Majors (should be empty): " + open.getEligibleMajors());
+        System.out.println(open.toString());
 
-        System.out.println("\nScholarship model tests complete.");
+        if (!open.getEligibleMajors().isEmpty()) {
+            System.out.println("Test: Failed to construct a scholarship with all eligible majors");
+        } else {
+            System.out.println("Test: All tests passed successfully!");
+        }
     }
 }

@@ -1,5 +1,3 @@
-package backend;
-
 public class TestUsersDatabase {
 
     public static boolean testUserAddSuccess(User dummyUser) {

@@ -1,5 +1,3 @@
-package backend;
-
 import java.security.MessageDigest;
 import java.util.HexFormat;
 import java.util.Scanner;

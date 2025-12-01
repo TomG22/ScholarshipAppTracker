@@ -1,5 +1,3 @@
-package backend;
-
 /**
  * MatchResult – represents the result of matching one Applicant to one Scholarship.
  * Implements Comparable so results can be sorted by score (highest first).

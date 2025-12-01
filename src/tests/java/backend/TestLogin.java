@@ -1,5 +1,3 @@
-package backend;
-
 public class TestLogin {
     public static void main(String[] args) {
         // Initialize the login helper

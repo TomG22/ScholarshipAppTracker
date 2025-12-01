@@ -1,16 +1,9 @@
-package backend;
-
 public class User {
 
-    // Enum used for classifying user privileges
     public enum RoleType {
         APPLICANT,
         REVIEWER,
         SCHOLARSHIP_PROVIDER,
-        // Extra roles, if needed:
-        // SCHOLARSHIP_ADMIN,
-        // FUND_STEWARD,
-        // ENGR_IT,
     }
 
     private final String netId;
@@ -19,7 +12,6 @@ public class User {
     private final RoleType role;
 
     public User(String netId, String name, String password, RoleType role) {
-
         if (netId == null || netId.isEmpty())
             throw new IllegalArgumentException("NetID cannot be null or empty.");
 

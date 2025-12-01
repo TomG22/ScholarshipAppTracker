@@ -1,5 +1,3 @@
-package backend;
-
 public class ApplicationEntry {
 
     private final Application application;
