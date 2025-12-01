@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.Set;
 import java.util.List;
 
 public class MatchingEngineMajorTest {
@@ -8,21 +8,23 @@ public class MatchingEngineMajorTest {
         MatchingEngine engine = new MatchingEngine();
 
         Applicant applicant = new Applicant(
+                "sampleNetId",
                 "Wrong Major",
+                "badpassword",
                 "Business",
-                3.8,
-                Arrays.asList("analytics"),
-                Arrays.asList("management")
+                Set.of("management"),
+                3.8
         );
 
         Scholarship scholarship = new Scholarship(
                 "Engineering Scholarship",
                 3.0,
-                Arrays.asList("computer science", "software engineering"),
-                Arrays.asList("coding")
+                8000,
+                Set.of("computer science", "software engineering"),
+                Set.of("coding")
         );
 
-        List<MatchResult> results = engine.matchApplicant(applicant, Arrays.asList(scholarship));
+        List<MatchResult> results = engine.matchApplicant(applicant, Set.of(scholarship));
 
         System.out.println("=== Major Test ===");
         if (results.isEmpty()) {

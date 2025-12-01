@@ -1,5 +1,5 @@
-import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 public class MatchingEngineTop3Test {
 
@@ -8,19 +8,47 @@ public class MatchingEngineTop3Test {
         MatchingEngine engine = new MatchingEngine();
 
         Applicant a = new Applicant(
+                "tester01",
                 "Tester",
+                "password123",
                 "Computer Science",
-                3.9,
-                Arrays.asList("coding", "ai", "research"),
-                Arrays.asList("leadership")
+                Set.of("coding", "ai", "research"),
+                3.9
         );
 
-        Scholarship s1 = new Scholarship("S1", 3.0, Arrays.asList("computer science"), Arrays.asList("coding"));
-        Scholarship s2 = new Scholarship("S2", 3.0, Arrays.asList("computer science"), Arrays.asList("ai"));
-        Scholarship s3 = new Scholarship("S3", 3.0, Arrays.asList("computer science"), Arrays.asList("research"));
-        Scholarship s4 = new Scholarship("S4", 3.0, Arrays.asList("computer science"), Arrays.asList("coding"));
+        Scholarship s1 = new Scholarship(
+                "S1",
+                0.0,
+                3.0,
+                Set.of("computer science"),
+                Set.of("coding")
+        );
 
-        List<Scholarship> all = Arrays.asList(s1, s2, s3, s4);
+        Scholarship s2 = new Scholarship(
+                "S2",
+                0.0,
+                3.0,
+                Set.of("computer science"),
+                Set.of("ai")
+        );
+
+        Scholarship s3 = new Scholarship(
+                "S3",
+                0.0,
+                3.0,
+                Set.of("computer science"),
+                Set.of("research")
+        );
+
+        Scholarship s4 = new Scholarship(
+                "S4",
+                0.0,
+                3.0,
+                Set.of("computer science"),
+                Set.of("coding")
+        );
+
+        List<Scholarship> all = List.of(s1, s2, s3, s4);
 
         List<MatchResult> top3 = engine.topMatches(a, all, 3);
 
@@ -30,3 +58,4 @@ public class MatchingEngineTop3Test {
         }
     }
 }
+

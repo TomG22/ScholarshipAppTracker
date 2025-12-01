@@ -9,6 +9,7 @@ public class MatchingEngineTest {
                 "Samiur R",
                 "pass1",
                 "Computer Science",
+                Set.of(),
                 3.9
         );
 
@@ -17,6 +18,7 @@ public class MatchingEngineTest {
                 "Tom G",
                 "pass2",
                 "Software Engineering",
+                Set.of(),
                 3.4
         );
 
@@ -25,6 +27,7 @@ public class MatchingEngineTest {
                 "Lainey W",
                 "pass3",
                 "Information Science",
+                Set.of(),
                 3.7
         );
 
@@ -33,6 +36,7 @@ public class MatchingEngineTest {
                 "Sarah J",
                 "pass4",
                 "Business",
+                Set.of(),
                 3.2
         );
 

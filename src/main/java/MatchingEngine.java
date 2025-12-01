@@ -75,23 +75,30 @@ public class MatchingEngine {
 
        
         // ME-003: Keyword Matching
-       
-        Set<String> applicantWords = new HashSet<>();
-        a.getEssayKeywords().forEach(k -> applicantWords.add(k.toLowerCase()));
-        a.getExtracurricularKeywords().forEach(k -> applicantWords.add(k.toLowerCase()));
-
-        if (!s.getRequiredKeywords().isEmpty()) {
-
-            for (String kw : s.getRequiredKeywords()) {
-                if (!applicantWords.contains(kw.toLowerCase())) {
-                    why.append("Rejected: Missing keyword '").append(kw).append("'. ");
-                    return Optional.empty();
+        boolean addedKW = false;
+        for (String keyword : s.getRequiredKeywords()) {
+            for (String extracurricular : a.getExtracurriculars()) {
+                if (keyword.equals(extracurricular)) {
+                    addedKW = true;
                 }
             }
-
-            why.append("Contains required keywords. ");
-            score += KEYWORD_WEIGHT;
         }
+
+        for (String keyword : s.getRequiredKeywords()) {
+            for (String essayWord : a.getEssayWords()) {
+                if (keyword.equals(essayWord)) {
+                    addedKW = true;
+                }
+            }
+        }
+
+        if (!s.getRequiredKeywords().isEmpty() && !addedKW) {
+            why.append("Rejected: Contains no required keywords.");
+            return Optional.empty();
+        }
+
+        why.append("Contains required keywords. ");
+        score += KEYWORD_WEIGHT;
 
         // Normalize
         score = Math.min(1.0, score);

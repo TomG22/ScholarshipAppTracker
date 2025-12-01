@@ -1,5 +1,5 @@
-import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 public class MatchingEngineGpaTest {
 
@@ -7,22 +7,29 @@ public class MatchingEngineGpaTest {
 
         MatchingEngine engine = new MatchingEngine();
 
+        // Create low GPA applicant using correct Applicant constructor
         Applicant lowGpa = new Applicant(
+                "lgpa01",
                 "Low GPA Applicant",
+                "password123",
                 "Computer Science",
-                2.0,
-                Arrays.asList("coding"),
-                Arrays.asList("teamwork")
+                Set.of("coding"),
+                2.0
         );
 
+        // Create a scholarship requiring a 3.0 GPA
         Scholarship scholarship = new Scholarship(
                 "STEM Scholarship",
+                5000,
                 3.0,
-                Arrays.asList("computer science"),
-                Arrays.asList("coding")
+                Set.of("computer science"),
+                Set.of("coding")
         );
 
-        List<MatchResult> results = engine.matchApplicant(lowGpa, Arrays.asList(scholarship));
+        List<MatchResult> results = engine.matchApplicant(
+                lowGpa,
+                List.of(scholarship)
+        );
 
         System.out.println("=== GPA Test ===");
         if (results.isEmpty()) {
@@ -32,3 +39,4 @@ public class MatchingEngineGpaTest {
         }
     }
 }
+

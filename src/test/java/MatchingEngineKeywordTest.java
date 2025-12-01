@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.Set;
 import java.util.List;
 
 public class MatchingEngineKeywordTest {
@@ -9,35 +9,35 @@ public class MatchingEngineKeywordTest {
 
         // Applicant with ONLY "coding"
         Applicant applicant = new Applicant(
+                "testNetId",
                 "Keyword Tester",
+                "passowrd123",
                 "Computer Science",
-                3.6,
-                Arrays.asList("coding"),
-                Arrays.asList("leadership")
+                Set.of("coding"),
+                3.6
         );
 
         // Scholarship that requires just "coding" -> should MATCH
         Scholarship codingOnly = new Scholarship(
                 "Coding Only Scholarship",
                 3.0,
-                Arrays.asList("computer science"),
-                Arrays.asList("coding")
+                10000,
+                Set.of("computer science"),
+                Set.of("coding")
         );
 
         // Scholarship that requires "coding" AND "ai" -> should NOT MATCH
         Scholarship codingAndAi = new Scholarship(
                 "Coding + AI Scholarship",
                 3.0,
-                Arrays.asList("computer science"),
-                Arrays.asList("coding", "ai")
+                10000,
+                Set.of("computer science"),
+                Set.of("coding", "ai")
         );
 
-        List<Scholarship> scholarships = Arrays.asList(codingOnly, codingAndAi);
+        Set<Scholarship> scholarships = Set.of(codingOnly, codingAndAi);
 
         System.out.println("=== Keyword Matching Test ===");
-        System.out.println("Applicant keywords: " + applicant.getEssayKeywords()
-                + " + " + applicant.getExtracurricularKeywords());
-
         List<MatchResult> results = engine.matchApplicant(applicant, scholarships);
 
         if (results.isEmpty()) {

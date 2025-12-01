@@ -9,25 +9,23 @@ public class ApplicantModelTest {
                 "Test Student",
                 "password123",
                 "Computer Science",
+                java.util.Set.of("coding", "robotics", "volunteering"),
                 3.6
         );
 
-        System.out.println("\nName: " + a.getName());
-        System.out.println("Major: " + a.getMajor());
-        System.out.println("GPA: " + a.getGpa());
+        System.out.println(a.toString());
 
         Applicant lowGpa = new Applicant(
                 "lgpa01",
                 "Low GPA",
                 "weak password",
                 "Math",
+                java.util.Set.of("math club", "piano"),
                 2.1
         );
 
-        System.out.println("\nLow GPA Applicant: " +
-                lowGpa.getName() + " (GPA=" + lowGpa.getGpa() + ")");
+        System.out.println(lowGpa.toString());
 
         System.out.println("\nApplicant model tests complete.");
     }
 }
-

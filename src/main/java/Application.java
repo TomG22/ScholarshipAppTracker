@@ -49,20 +49,6 @@ public class Application {
     public UUID getID() { return id; }
     public String getEssay() { return essay; }
 
-    public Set<String> getMatchedKeywords(Set<String> keywords) {
-        HashSet<String> matched = new HashSet<>();
-
-        for (String word : this.essay.split("\\s+")) {
-            for (String keyword : keywords) {
-                if (word.equalsIgnoreCase(keyword)) {
-                    matched.add(keyword);
-                }
-            }
-        }
-
-        return matched;
-    }
-
     public User getAuthor() { return author; }
     public ApplicationStatus getStatus() { return status; }
     public boolean wasAwarded() { return awarded; }

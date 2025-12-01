@@ -11,6 +11,7 @@ public class MatchingEngineRequirementsTest {
                 "Good CS",
                 "pass123",
                 "Computer Science",
+                Set.of(),
                 3.8
         );
 
@@ -19,6 +20,7 @@ public class MatchingEngineRequirementsTest {
                 "Low GPA",
                 "pass321",
                 "Computer Science",
+                Set.of(),
                 2.5
         );
 
