@@ -6,6 +6,7 @@ import java.util.List;
 public class MatchingEngineKeywordTest {
 
     public static void main(String[] args) {
+
         MatchingEngine engine = new MatchingEngine();
 
         // Applicant with ONLY "coding"
@@ -36,6 +37,9 @@ public class MatchingEngineKeywordTest {
         List<Scholarship> scholarships = Arrays.asList(codingOnly, codingAndAi);
 
         System.out.println("=== Keyword Matching Test ===");
+        System.out.println("Applicant keywords: " + applicant.getEssayKeywords()
+                + " + " + applicant.getExtracurricularKeywords());
+
         List<MatchResult> results = engine.matchApplicant(applicant, scholarships);
 
         if (results.isEmpty()) {
@@ -45,5 +49,8 @@ public class MatchingEngineKeywordTest {
                 System.out.println(r);
             }
         }
+
+        System.out.println("=== End of Keyword Matching Test ===");
     }
 }
+
