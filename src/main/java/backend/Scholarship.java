@@ -11,8 +11,8 @@ public class Scholarship {
 
     public Scholarship(String name,
                        double minGpa,
-                       Collection<String> eligibleMajors,
-                       Collection<String> requiredKeywords) {
+                       Set<String> eligibleMajors,
+                       Set<String> requiredKeywords) {
 
         if (name == null || name.isEmpty())
             throw new IllegalArgumentException("Name cannot be null or empty.");
@@ -23,23 +23,13 @@ public class Scholarship {
         }
         this.minGpa = minGpa;
 
-        this.eligibleMajors = new HashSet<>();
-        if (eligibleMajors != null) {
-            for (String m : eligibleMajors) {
-                if (m != null) {
-                    this.eligibleMajors.add(m.toLowerCase());
-                }
-            }
-        }
+        if (eligibleMajors == null)
+            throw new IllegalArgumentException("Eligible Majors cannot be null.");
+        this.eligibleMajors = new HashSet<>(eligibleMajors);
 
-        this.requiredKeywords = new HashSet<>();
-        if (requiredKeywords != null) {
-            for (String kw : requiredKeywords) {
-                if (kw != null) {
-                    this.requiredKeywords.add(kw.toLowerCase());
-                }
-            }
-        }
+        if (requiredKeywords == null)
+            throw new IllegalArgumentException("Required Majors cannot be null.");
+        this.requiredKeywords = new HashSet<>(requiredKeywords);
     }
 
     public String getName() {

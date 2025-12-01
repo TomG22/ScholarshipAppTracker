@@ -23,7 +23,7 @@ public class Application {
         return essay;
     }
 
-    public Set<String> matchKeywords(Set<String> keywords) {
+    public Set<String> getMatchedKeywords(Set<String> keywords) {
         HashSet<String> matched = new HashSet<String>();
 
         for (String word : this.essay.split("\\s+")) {

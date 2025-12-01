@@ -9,7 +9,11 @@ public class LoginSystem {
     User client;
 
     public User getClient() {
-        return client;
+        return this.client;
+    }
+
+    public User.RoleType getClientRole() {
+        return this.client.getRole();
     }
 
     public String encStr(String str) {
