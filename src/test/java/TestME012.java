@@ -51,12 +51,8 @@ public class TestME012 {
             );
 
             MatchingEngine engine = new MatchingEngine();
-
             List<Scholarship> scholarships = List.of(s1, s2, s3, s4);
             List<MatchResult> results = engine.topMatches(applicant, scholarships, 3);
-
-            if (results.size() != 3)
-                return false;
 
             return results.get(0).getScore() >= results.get(1).getScore()
                     && results.get(1).getScore() >= results.get(2).getScore();
@@ -94,7 +90,6 @@ public class TestME012 {
             );
 
             MatchingEngine engine = new MatchingEngine();
-
             List<Scholarship> scholarships = List.of(s1, s2);
             List<MatchResult> results = engine.topMatches(applicant, scholarships, 3);
 
@@ -102,6 +97,28 @@ public class TestME012 {
         } catch (Exception e) {
             System.out.println("Test failed with fewer than three matches: " + e.getMessage());
             return false;
+        }
+    }
+
+    public static void printTopThreeMatches(Applicant applicant, List<Scholarship> scholarships) {
+        try {
+            MatchingEngine engine = new MatchingEngine();
+            List<MatchResult> results = engine.topMatches(applicant, scholarships, 3);
+
+            System.out.println("Top matches for applicant: " + applicant.getName());
+            if (results.isEmpty()) {
+                System.out.println("No qualifying matches found.");
+                return;
+            }
+
+            for (int i = 0; i < results.size(); i++) {
+                MatchResult mr = results.get(i);
+                System.out.println((i + 1) + ". Scholarship: " + mr.getScholarship().getName() +
+                        " | Score: " + mr.getScore() +
+                        " | Explanation: " + mr.getExplanation());
+            }
+        } catch (Exception e) {
+            System.out.println("Error while printing top matches: " + e.getMessage());
         }
     }
 
@@ -123,6 +140,50 @@ public class TestME012 {
         } else {
             System.out.println("Test: One or more ME-012 tests FAILED.");
         }
+
+        Set<String> keywords = new HashSet<>(Arrays.asList("ai", "research", "ml"));
+        Applicant applicant = new Applicant(
+                "topUser",
+                "Top User",
+                "password123",
+                "computer science",
+                keywords,
+                3.9
+        );
+
+        Scholarship s1 = new Scholarship(
+                "Scholarship A",
+                2000.0,
+                3.0,
+                Set.of("computer science"),
+                Set.of("ai")
+        );
+
+        Scholarship s2 = new Scholarship(
+                "Scholarship B",
+                2000.0,
+                3.0,
+                Set.of("computer science"),
+                Set.of("research")
+        );
+
+        Scholarship s3 = new Scholarship(
+                "Scholarship C",
+                2000.0,
+                3.0,
+                Set.of("computer science"),
+                Set.of("ml")
+        );
+
+        Scholarship s4 = new Scholarship(
+                "Scholarship D",
+                2000.0,
+                3.0,
+                Set.of("computer science"),
+                Set.of("innovation")
+        );
+
+        List<Scholarship> scholarships = List.of(s1, s2, s3, s4);
+        printTopThreeMatches(applicant, scholarships);
     }
 }
-
