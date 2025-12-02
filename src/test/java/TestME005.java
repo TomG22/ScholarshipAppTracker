@@ -61,6 +61,37 @@ public class TestME005 {
         }
     }
 
+    public static void printRankedApplicantsForScholarship(Scholarship scholarship, List<Applicant> applicants) {
+        try {
+            MatchingEngine engine = new MatchingEngine();
+            List<MatchResult> results = new ArrayList<>();
+
+            for (Applicant applicant : applicants) {
+                List<MatchResult> matches = engine.matchApplicant(applicant, List.of(scholarship));
+                results.addAll(matches);
+            }
+
+            Collections.sort(results);
+
+            System.out.println("Ranked applicants for scholarship: " + scholarship.getName());
+            if (results.isEmpty()) {
+                System.out.println("No qualifying applicants found.");
+                return;
+            }
+
+            for (int i = 0; i < results.size(); i++) {
+                MatchResult mr = results.get(i);
+                System.out.println((i + 1) + ". Applicant: " + mr.getApplicant().getName() +
+                        " | Score: " + mr.getScore() +
+                        " | GPA: " + mr.getApplicant().getGpa() +
+                        " | Major: " + mr.getApplicant().getMajor() +
+                        " | Explanation: " + mr.getExplanation());
+            }
+        } catch (Exception e) {
+            System.out.println("Error while printing ranked applicants: " + e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         boolean passed = true;
 
@@ -74,6 +105,52 @@ public class TestME005 {
         } else {
             System.out.println("Test: One or more ME-005 tests FAILED.");
         }
+
+        Applicant applicant1 = new Applicant(
+                "topApplicant",
+                "Alice Johnson",
+                "password123",
+                "computer science",
+                new HashSet<>(Arrays.asList("ai", "machine learning")),
+                3.95
+        );
+
+        Applicant applicant2 = new Applicant(
+                "goodApplicant",
+                "Bob Smith",
+                "password123",
+                "computer science",
+                new HashSet<>(Arrays.asList("ai", "research")),
+                3.85
+        );
+
+        Applicant applicant3 = new Applicant(
+                "decentApplicant",
+                "Carol Davis",
+                "password123",
+                "computer science",
+                new HashSet<>(Arrays.asList("machine learning")),
+                3.7
+        );
+
+        Applicant applicant4 = new Applicant(
+                "lowApplicant",
+                "David Lee",
+                "password123",
+                "computer science",
+                new HashSet<>(Arrays.asList("web development")),
+                3.5
+        );
+
+        Scholarship scholarship = new Scholarship(
+                "AI Research Excellence Scholarship",
+                5000.0,
+                3.5,
+                Set.of("computer science"),
+                Set.of("ai", "machine learning")
+        );
+
+        List<Applicant> applicants = List.of(applicant1, applicant2, applicant3, applicant4);
+        printRankedApplicantsForScholarship(scholarship, applicants);
     }
 }
-
