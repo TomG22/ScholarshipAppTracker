@@ -3,3 +3,37 @@ ID,NetID,Name,Password,Major,GPA,AwardBalance,Extracurriculars
 a4042e58-4729-4f59-aaff-9344b2b0931d,tstudent1,Test Student,password123,Computer Science,3.6,0.0,coding;robotics;volunteering
 504ce7de-9c4c-4046-833e-eba4a7bf79c6,tstudent1,Test Student,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,Computer Science,3.6,0.0,coding;robotics;volunteering
 1361c41f-dc1a-4b6b-8930-eb6fe75f0e9e,tstudent1,Test Student,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,Computer Science,3.6,0.0,coding;volunteering;robotics
+b22baf74-e183-43b1-8279-959d7ba952b0,tstudent1,Test Student,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,Computer Science,3.6,0.0,coding;volunteering;robotics
+c87f2147-50d6-4677-aa43-0d94dcada2eb,tstudent1,Test Student,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,Computer Science,3.6,0.0,coding;volunteering;robotics
+430a4ce9-e74d-4758-8c0e-bb153e503482,jdoe001,Jane Doe,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,computer science,3.8,0.0,ai;programming;research
+3cafcf31-9ecb-4a60-ade4-314551bfde0b,bsmith002,Bob Smith,9878d344400c00f8bab1a4ba1a3488b3ace88aea983e3d94ba1c781e09ba32bb,engineering,3.6,0.0,community service;leadership;robotics
+b4d1940b-d0f8-4cb5-8403-f9d624ea074d,tstudent1,Test Student,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,Computer Science,3.6,0.0,coding;robotics;volunteering
+f9104cd4-d757-4f37-a903-adadbfff646e,jdoe001,Jane Doe,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,computer science,3.8,0.0,ai;programming;research
+42d7ef3f-02a2-481c-ac0c-9d01b892c637,bsmith002,Bob Smith,9878d344400c00f8bab1a4ba1a3488b3ace88aea983e3d94ba1c781e09ba32bb,engineering,3.6,0.0,community service;leadership;robotics
+6f0cfb75-9cbf-4804-b184-7f5b65ae3c27,tstudent1,Test Student,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,Computer Science,3.6,0.0,coding;volunteering;robotics
+754e34f8-c657-40ac-9507-60bca624c59a,jdoe001,Jane Doe,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,computer science,3.8,0.0,ai;programming;research
+254d2452-e0fd-4609-bfac-b9aa47ffaf89,bsmith002,Bob Smith,9878d344400c00f8bab1a4ba1a3488b3ace88aea983e3d94ba1c781e09ba32bb,engineering,3.6,0.0,community service;leadership;robotics
+1b2e856f-b684-49c2-bc24-9c0fd0193de6,tstudent1,Test Student,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,Computer Science,3.6,0.0,coding;volunteering;robotics
+c35031a5-a0f7-46e4-9b9d-bc35eb30cf27,jdoe001,Jane Doe,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,computer science,3.8,0.0,ai;research;programming
+d3b66640-ed9b-488b-9f3f-babbfb36bd98,bsmith002,Bob Smith,9878d344400c00f8bab1a4ba1a3488b3ace88aea983e3d94ba1c781e09ba32bb,engineering,3.6,0.0,community service;leadership;robotics
+3b2ea761-6de3-49f8-9eaf-7d7b72bfc099,tstudent1,Test Student,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,Computer Science,3.6,0.0,coding;robotics;volunteering
+c80d5d5d-c831-43fe-8b8c-1285c8e2c5de,jdoe001,Jane Doe,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,computer science,3.8,0.0,ai;programming;research
+54ee1b74-4bf2-4004-9157-14a5c1266646,bsmith002,Bob Smith,9878d344400c00f8bab1a4ba1a3488b3ace88aea983e3d94ba1c781e09ba32bb,engineering,3.6,0.0,community service;leadership;robotics
+5771fe5a-78c9-4f5f-8712-2875868439a5,tstudent1,Test Student,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,Computer Science,3.6,0.0,coding;volunteering;robotics
+e94d8e3c-6e40-47d7-9061-c3cecf3beb9f,jdoe001,Jane Doe,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,computer science,3.8,0.0,ai;research;programming
+ebf0dd8b-1e03-47e3-a879-9fd3661bc5c9,bsmith002,Bob Smith,9878d344400c00f8bab1a4ba1a3488b3ace88aea983e3d94ba1c781e09ba32bb,engineering,3.6,0.0,community service;leadership;robotics
+e41459b9-26d3-42ae-bf94-25a05cff694a,tstudent1,Test Student,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,Computer Science,3.6,0.0,coding;robotics;volunteering
+576d7da4-812c-46cb-b7ad-749ea83f2dc1,jdoe001,Jane Doe,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,computer science,3.8,0.0,ai;research;programming
+009147af-163c-4761-8a76-1fac3ec28fbd,bsmith002,Bob Smith,9878d344400c00f8bab1a4ba1a3488b3ace88aea983e3d94ba1c781e09ba32bb,engineering,3.6,0.0,community service;leadership;robotics
+4d915b20-5496-4c04-8fea-a4e3718fbeb7,tstudent1,Test Student,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,Computer Science,3.6,0.0,coding;volunteering;robotics
+787ca63b-1079-441e-9f06-4ddeae551b31,jdoe001,Jane Doe,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,computer science,3.8,0.0,ai;research;programming
+84d530d3-7cc5-432d-92ec-b7314c133df8,bsmith002,Bob Smith,9878d344400c00f8bab1a4ba1a3488b3ace88aea983e3d94ba1c781e09ba32bb,engineering,3.6,0.0,community service;leadership;robotics
+79384685-dff3-48ff-99fe-6d4df4bf238d,mchen003,Michelle Chen,9dbd5c893b5b573a1aa909c8cade58df194310e411c590d9fb0d63431841fd67,mathematics,3.9,0.0,volunteering;tutoring;research
+a7199323-97f1-4404-87d0-476baa44276d,tstudent1,Test Student,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,Computer Science,3.6,0.0,coding;volunteering;robotics
+a6ffdd09-7d99-44b4-bef0-b8f904aa82f5,jdoe001,Jane Doe,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,computer science,3.8,0.0,ai;programming;research
+1fd18749-0b84-4033-96db-db6a31649081,bsmith002,Bob Smith,9878d344400c00f8bab1a4ba1a3488b3ace88aea983e3d94ba1c781e09ba32bb,engineering,3.6,0.0,community service;leadership;robotics
+4ab21d8f-4002-4635-935b-2135ce8a8893,mchen003,Michelle Chen,9dbd5c893b5b573a1aa909c8cade58df194310e411c590d9fb0d63431841fd67,mathematics,3.9,0.0,volunteering;tutoring;research
+ef25af14-8988-4e69-92dc-4afa3741b426,tstudent1,Test Student,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,Computer Science,3.6,0.0,coding;volunteering;robotics
+701c96b1-ae41-4111-8a74-82ac03095abe,jdoe001,Jane Doe,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,computer science,3.8,0.0,ai;research;programming
+8e0cf6d2-4e70-4d7d-bb0c-c13a703c8fa7,bsmith002,Bob Smith,9878d344400c00f8bab1a4ba1a3488b3ace88aea983e3d94ba1c781e09ba32bb,engineering,3.6,0.0,community service;leadership;robotics
+b8729816-5a18-4b10-827e-193eacdb3751,mchen003,Michelle Chen,9dbd5c893b5b573a1aa909c8cade58df194310e411c590d9fb0d63431841fd67,mathematics,3.9,0.0,volunteering;tutoring;research
