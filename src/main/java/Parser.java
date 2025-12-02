@@ -9,7 +9,18 @@ public class Parser {
 
     private Scholarship parseScholarshipFromJSONObject(JSONObject json) {
         String name = json.getString("name");
-        double awardAmount = json.getDouble("awardAmount");
+
+        double awardAmount = 0.0;
+        try {
+            awardAmount = json.getDouble("awardAmount");
+        } catch (Exception e) {
+            try {
+                awardAmount = Double.parseDouble(json.getString("awardAmount"));
+            } catch (NumberFormatException ex) {
+                throw new IllegalArgumentException("Invalid awardAmount format: " + json.getString("awardAmount"));
+            }
+        }
+
         double minGpa = json.getDouble("minGpa");
 
         Set<String> eligibleMajors = new HashSet<>();
@@ -66,7 +77,15 @@ public class Parser {
     private Application parseApplicationFromJSONObject(JSONObject json) {
         String essay = json.getString("essay");
 
+        if (!json.has("author") || json.isNull("author")) {
+            throw new IllegalArgumentException("Author cannot be null.");
+        }
+
         JSONObject authorJson = json.getJSONObject("author");
+        if (authorJson == null) {
+            throw new IllegalArgumentException("Author cannot be null.");
+        }
+
         User author = parseUserFromJSONObject(authorJson);
 
         return new Application(essay, author);

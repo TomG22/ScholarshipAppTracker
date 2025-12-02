@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Scholarship A",
+        "awardAmount": 1000.0,
+        "minGpa": 3.5,
+        "eligibleMajors": ["Computer Science", "Engineering"],
+        "requiredKeywords": ["leadership", "innovation"]
+    },
+    {
+        "name": "Scholarship B",
+        "awardAmount": 2000.0,
+        "minGpa": 3.8,
+        "eligibleMajors": ["Mathematics"],
+        "requiredKeywords": ["research", "academics"]
+    }
+]
+

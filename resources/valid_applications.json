@@ -1,0 +1,12 @@
+[
+    {
+        "essay": "This is a valid essay.",
+        "author": {
+            "netId": "johndoe123",
+            "name": "John Doe",
+            "password": "securepass",
+            "role": "APPLICANT"
+        }
+    }
+]
+
