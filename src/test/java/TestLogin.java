@@ -7,8 +7,8 @@ public class TestLogin {
         loginSys.signIn();
 
         // Output when the user has logged in
-        String clientName = loginSys.getClient().getName();
-        switch (loginSys.getClient().getRole()) {
+        String clientName = UsersDatabase.getCurrentUser().getName();
+        switch (UsersDatabase.getCurrentUser().getRole()) {
             case APPLICANT:
                 System.out.println("Applicant " + clientName + " has successfully logged in");
                 break;
@@ -22,7 +22,7 @@ public class TestLogin {
 
         loginSys.signOut();
 
-        if (loginSys.getClient() == null) {
+        if (UsersDatabase.getCurrentUser() == null) {
             System.out.println("Successfully logged out " + clientName);
         }
     }

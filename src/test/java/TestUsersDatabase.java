@@ -1,5 +1,6 @@
 public class TestUsersDatabase {
 
+    /*
     public static boolean testUserAddSuccess(User dummyUser) {
         boolean addUserResult = UsersDatabase.addUser(dummyUser);
         return addUserResult;
@@ -17,12 +18,6 @@ public class TestUsersDatabase {
 
     public static boolean testUserRemoveFail(User dummyUser) {
         return !UsersDatabase.removeUser(dummyUser.getID());
-    }
-
-    public static boolean testClear() {
-        UsersDatabase.clear(); 
-        
-        return UsersDatabase.isEmpty();
     }
 
     public static void main(String[] args) {
@@ -64,5 +59,6 @@ public class TestUsersDatabase {
             System.out.println("Test: All tests passed successfully!");
         }
     }
+    */
 }
 

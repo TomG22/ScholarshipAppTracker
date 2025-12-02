@@ -80,6 +80,7 @@ public class MatchingEngine {
             for (String extracurricular : a.getExtracurriculars()) {
                 if (keyword.equals(extracurricular)) {
                     addedKW = true;
+                    break;
                 }
             }
         }
@@ -88,6 +89,7 @@ public class MatchingEngine {
             for (String essayWord : a.getEssayWords()) {
                 if (keyword.equals(essayWord)) {
                     addedKW = true;
+                    break;
                 }
             }
         }
