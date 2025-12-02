@@ -1,42 +1,22 @@
-import java.security.MessageDigest;
-import java.util.HexFormat;
 import java.util.Scanner;
 
 public class LoginSystem {
 
     public static User client;
 
-    public String encStr(String str) {
-        try {
-            // Get a sha-256 byte array of the string 
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] buf = md.digest(str.getBytes());
-
-            // Convert the byte array to a hex and then to a string 
-            return HexFormat.of().formatHex(buf);
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    // Prompts for a user to sign in until they have signed in
     public void signIn() {
         if (UsersDatabase.getCurrentUser() != null)
             System.out.println("A user is already signed in. Must log out first.");
 
-
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            // Prompt for the user's login details
             System.out.print("Enter your netID: ");
             String netId = scanner.next();
 
             System.out.print("Enter your password: ");
             String password = scanner.next();
 
-            // Check if the user exists
             User client = UsersDatabase.getUserByNetID(netId);
 
             if (client == null) {
@@ -44,16 +24,11 @@ public class LoginSystem {
                 continue;
             }
 
-            // If the user exists, attempt to log them in
-            String encPassword = encStr(password);
-
-            // The user entered the wrong password for the given account
-            if (!UsersDatabase.authUser(netId, encPassword)) {
+            if (!UsersDatabase.authUser(netId, password)) {
                 System.out.println("Incorrect password. Please try again.");
                 continue;
             }
 
-            // The user successfully logged in
             scanner.close();
             break;
         }
@@ -67,22 +42,18 @@ public class LoginSystem {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            // Prompt for netID
             System.out.print("Enter your netID: ");
             String netId = scanner.next();
 
-            // Check if user already exists
             if (UsersDatabase.getUserByNetID(netId) != null) {
                 System.out.println("An account with this netID already exists. Please choose a different netID.");
                 continue;
             }
 
-            // Prompt for full name
             System.out.print("Enter your full name: ");
             scanner.nextLine();  // clear newline
             String name = scanner.nextLine();
 
-            // Password + confirmation
             System.out.print("Enter a password: ");
             String password = scanner.next();
 
@@ -93,19 +64,9 @@ public class LoginSystem {
                 System.out.println("Passwords do not match. Try again.");
                 System.out.print("Confirm your password: ");
                 confirmPassword = scanner.next();
-                continue;
             }
 
-            // Encrypt password
-            String encPassword = encStr(password);
-
-            // Create user
-            // Must replace with a switch case to add specific type of user
-            //User newUser = new User(netId, name, encPassword, role);
-
-            // Add user to database
-            // Add the specific type to the database
-            //UsersDatabase.addUser(newUser);
+            User newUser = new User(netId, name, password, role);
 
             System.out.println("Account created successfully for role: " + role);
             scanner.close();
