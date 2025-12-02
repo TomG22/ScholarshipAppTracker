@@ -141,6 +141,25 @@ public class TestBA005 {
         }
     }
 
+    public static void printApplicantInfo(List<Applicant> applicants) {
+        System.out.println("Applicant Information Storage Example");
+        System.out.println("Total applicants: " + applicants.size());
+        System.out.println();
+
+        for (int i = 0; i < applicants.size(); i++) {
+            Applicant applicant = applicants.get(i);
+            System.out.println("Applicant #" + (i + 1));
+            System.out.println("  NetID: " + applicant.getNetID());
+            System.out.println("  Name: " + applicant.getName());
+            System.out.println("  Major: " + applicant.getMajor());
+            System.out.println("  GPA: " + applicant.getGpa());
+            System.out.println("  Extracurriculars: " + applicant.getExtracurriculars());
+            System.out.println("  Password (encrypted): " + applicant.getPassword());
+            System.out.println("  Password is encrypted: " + !applicant.getPassword().equals("password123"));
+            System.out.println();
+        }
+    }
+
     public static void main(String[] args) {
         boolean passed = true;
 
@@ -174,5 +193,37 @@ public class TestBA005 {
         } else {
             System.out.println("Test: One or more tests FAILED.");
         }
+
+        Applicant applicant1 = new Applicant(
+                "jsmith001",
+                "Jennifer Smith",
+                "password123",
+                "Computer Science",
+                new HashSet<>(Arrays.asList("ai", "machine learning", "research")),
+                3.9
+        );
+
+        Applicant applicant2 = new Applicant(
+                "bwilson002",
+                "Brian Wilson",
+                "securepass456",
+                "Engineering",
+                new HashSet<>(Arrays.asList("robotics", "design", "leadership")),
+                3.7
+        );
+
+        Applicant applicant3 = new Applicant(
+                "agarcia003",
+                "Ana Garcia",
+                "mypassword789",
+                "Mathematics",
+                new HashSet<>(Arrays.asList("tutoring", "research", "programming")),
+                3.85
+        );
+
+        List<Applicant> applicants = List.of(applicant1, applicant2, applicant3);
+
+        System.out.println("\nApplicant Data Storage Example");
+        printApplicantInfo(applicants);
     }
 }
