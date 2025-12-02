@@ -13,9 +13,9 @@ public class MatchResult implements Comparable<MatchResult> {
     private final LocalDateTime timestamp;  // ME-006 Traceability
 
     public MatchResult(Applicant applicant,
-                       Scholarship scholarship,
-                       double score,
-                       String explanation) {
+            Scholarship scholarship,
+            double score,
+            String explanation) {
 
         if (applicant == null) throw new IllegalArgumentException("Applicant cannot be null");
         if (scholarship == null) throw new IllegalArgumentException("Scholarship cannot be null");
@@ -48,11 +48,11 @@ public class MatchResult implements Comparable<MatchResult> {
     @Override
     public String toString() {
         return "MatchResult{" +
-                "applicant=" + applicant.getName() +
-                ", scholarship=" + scholarship.getName() +
-                ", score=" + score +
-                ", explanation='" + explanation + '\'' +
-                ", timestamp=" + timestamp +
-                '}';
+            "applicant=" + applicant.getName() +
+            ", scholarship=" + scholarship.getName() +
+            ", score=" + String.format("%.3f", score) +
+            ", explanation='" + explanation + '\'' +
+            ", timestamp=" + timestamp +
+            '}';
     }
 }

@@ -2,3 +2,4 @@ ID,NetID,Name,Password,Major,GPA,AwardBalance,Extracurriculars
 391515fb-f7cc-4386-8fc1-2b189b11a01d,tstudent1,Test Student,password123,Computer Science,3.6,0.0,coding;volunteering;robotics
 a4042e58-4729-4f59-aaff-9344b2b0931d,tstudent1,Test Student,password123,Computer Science,3.6,0.0,coding;robotics;volunteering
 504ce7de-9c4c-4046-833e-eba4a7bf79c6,tstudent1,Test Student,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,Computer Science,3.6,0.0,coding;robotics;volunteering
+1361c41f-dc1a-4b6b-8930-eb6fe75f0e9e,tstudent1,Test Student,ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f,Computer Science,3.6,0.0,coding;volunteering;robotics

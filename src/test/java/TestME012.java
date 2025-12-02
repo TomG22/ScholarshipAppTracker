@@ -16,7 +16,7 @@ public class TestME012 {
                     "computer science",
                     new HashSet<>(Arrays.asList("ai", "research", "ml")),
                     3.9
-            );
+                    );
 
             Scholarship s1 = new Scholarship(
                     "Scholarship A",
@@ -24,7 +24,7 @@ public class TestME012 {
                     3.0,
                     Set.of("computer science"),
                     Set.of("ai")
-            );
+                    );
 
             Scholarship s2 = new Scholarship(
                     "Scholarship B",
@@ -32,7 +32,7 @@ public class TestME012 {
                     3.0,
                     Set.of("computer science"),
                     Set.of("research")
-            );
+                    );
 
             Scholarship s3 = new Scholarship(
                     "Scholarship C",
@@ -40,7 +40,7 @@ public class TestME012 {
                     3.0,
                     Set.of("computer science"),
                     Set.of("ml")
-            );
+                    );
 
             Scholarship s4 = new Scholarship(
                     "Scholarship D",
@@ -48,14 +48,14 @@ public class TestME012 {
                     3.0,
                     Set.of("computer science"),
                     Set.of("innovation")
-            );
+                    );
 
             MatchingEngine engine = new MatchingEngine();
             List<Scholarship> scholarships = List.of(s1, s2, s3, s4);
             List<MatchResult> results = engine.topMatches(applicant, scholarships, 3);
 
             return results.get(0).getScore() >= results.get(1).getScore()
-                    && results.get(1).getScore() >= results.get(2).getScore();
+                && results.get(1).getScore() >= results.get(2).getScore();
         } catch (Exception e) {
             System.out.println("Test failed for top three matches: " + e.getMessage());
             return false;
@@ -71,7 +71,7 @@ public class TestME012 {
                     "computer science",
                     new HashSet<>(Arrays.asList("ai")),
                     3.6
-            );
+                    );
 
             Scholarship s1 = new Scholarship(
                     "Scholarship A",
@@ -79,7 +79,7 @@ public class TestME012 {
                     3.0,
                     Set.of("computer science"),
                     Set.of("ai")
-            );
+                    );
 
             Scholarship s2 = new Scholarship(
                     "Scholarship B",
@@ -87,7 +87,7 @@ public class TestME012 {
                     3.0,
                     Set.of("computer science"),
                     Set.of("ai")
-            );
+                    );
 
             MatchingEngine engine = new MatchingEngine();
             List<Scholarship> scholarships = List.of(s1, s2);
@@ -114,8 +114,9 @@ public class TestME012 {
             for (int i = 0; i < results.size(); i++) {
                 MatchResult mr = results.get(i);
                 System.out.println((i + 1) + ". Scholarship: " + mr.getScholarship().getName() +
-                        " | Score: " + mr.getScore() +
+                        " | Score: " + String.format("%.3f", mr.getScore()) +
                         " | Explanation: " + mr.getExplanation());
+
             }
         } catch (Exception e) {
             System.out.println("Error while printing top matches: " + e.getMessage());
@@ -149,7 +150,7 @@ public class TestME012 {
                 "computer science",
                 keywords,
                 3.9
-        );
+                );
 
         Scholarship s1 = new Scholarship(
                 "Scholarship A",
@@ -157,7 +158,7 @@ public class TestME012 {
                 3.0,
                 Set.of("computer science"),
                 Set.of("ai")
-        );
+                );
 
         Scholarship s2 = new Scholarship(
                 "Scholarship B",
@@ -165,7 +166,7 @@ public class TestME012 {
                 3.0,
                 Set.of("computer science"),
                 Set.of("research")
-        );
+                );
 
         Scholarship s3 = new Scholarship(
                 "Scholarship C",
@@ -173,7 +174,7 @@ public class TestME012 {
                 3.0,
                 Set.of("computer science"),
                 Set.of("ml")
-        );
+                );
 
         Scholarship s4 = new Scholarship(
                 "Scholarship D",
@@ -181,7 +182,7 @@ public class TestME012 {
                 3.0,
                 Set.of("computer science"),
                 Set.of("innovation")
-        );
+                );
 
         List<Scholarship> scholarships = List.of(s1, s2, s3, s4);
         printTopThreeMatches(applicant, scholarships);
