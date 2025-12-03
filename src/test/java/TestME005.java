@@ -82,7 +82,7 @@ public class TestME005 {
             for (int i = 0; i < results.size(); i++) {
                 MatchResult mr = results.get(i);
                 System.out.println((i + 1) + ". Applicant: " + mr.getApplicant().getName() +
-                        " | Score: " + mr.getScore() +
+                        " | Score: " + String.format("%.3f", mr.getScore()) +
                         " | GPA: " + mr.getApplicant().getGpa() +
                         " | Major: " + mr.getApplicant().getMajor() +
                         " | Explanation: " + mr.getExplanation());
